@@ -9,11 +9,17 @@ public class Reputation : MonoBehaviour
 {
     public int reputation=100;
     public int reputationMax=100;
-    ReputationBar reputationBar;
+    public ReputationBar reputationBar;
     void Start()
     {
         UpdateBar();
     }
+
+    /*private void Update()
+    {
+        addReputation(-1);
+    }*/
+
 
     /// <summary>
     /// ajoute une valeur a la reputation 
@@ -22,7 +28,12 @@ public class Reputation : MonoBehaviour
     void addReputation(int n) 
     {
         reputation += n;
+
+        if (reputation > reputationMax) { reputation=reputationMax; }
+        if (reputation <=0) { GameOver(); reputation = 0; }
         UpdateBar();
+        
+
     }
 
     /// <summary>
