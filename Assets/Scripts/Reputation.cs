@@ -10,16 +10,15 @@ public class Reputation : MonoBehaviour
     public int reputation=100;
     public int reputationMax=100;
     public ReputationBar reputationBar;
+
+
+    /// <summary>
+    /// a faire
+    /// </summary>
     void Start()
     {
         UpdateBar();
     }
-
-    /*private void Update()
-    {
-        addReputation(-1);
-    }*/
-
 
     /// <summary>
     /// ajoute une valeur a la reputation 
@@ -44,6 +43,9 @@ public class Reputation : MonoBehaviour
         reputationBar.SetRepution((0f+reputation)/reputationMax);
     }
 
+    /// <summary>
+    /// a faire
+    /// </summary>
     void GameOver()
     {
         //To do
