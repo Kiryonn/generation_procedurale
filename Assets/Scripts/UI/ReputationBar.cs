@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 
 /// <summary>
-/// ReputionBar sert a changée la valeur de la barre affichée 
+/// class qui gère la Bar de Repution
 /// </summary>
-public class ReputionBar : MonoBehaviour
+public class ReputationBar : MonoBehaviour
 {
     public float reputation = 0.3f;
     public Image reputationFill;
@@ -16,7 +16,7 @@ public class ReputionBar : MonoBehaviour
     /// change la valeur de la barre de reputaion pour une valeur x 
     /// </summary>
     /// <param name="x">taille de la barre entre 0 et 1 en float </param>
-    void SetRepution(float x)
+    public void SetRepution(float x)
     {
         reputation = x;
         if (reputation > 1) { reputation = 1; }
