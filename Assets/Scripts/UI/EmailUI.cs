@@ -1,50 +1,45 @@
-﻿using System;
+﻿using Data;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
 {
-    public class EmailUI: MonoBehaviour
-    {
-        [Header("Body Padding")]
-        [SerializeField] private int bodyPaddingTop;
-        [SerializeField] private int bodyPaddingLeft;
-        [Header("Footer Padding")]
-        [SerializeField] private int footerPaddingTop;
-        [SerializeField] private int footerPaddingLeft;
+	public class EmailUI: MonoBehaviour
+	{
+		[SerializeField] private VerticalLayoutGroup textArea;
+		[SerializeField] private TMP_Text addressTMPText;
+		[SerializeField] private TMP_Text headerTMPText;
+		[SerializeField] private TMP_Text bodyTMPText;
+		[SerializeField] private TMP_Text footerTMPText;
+		private void Start()
+		{
+			Email email = new Email(
+				"miaou1234@gmail.com",
+				"Bonjour,",
+				"Ceci est un texte qui n'a aucun sens. Ne lisez pas. Non vraiment y a rien a lire. Pourquoi tu lis ? T'es con ou quoi ? egaegaehae heearhea ej aeoijg oaej jeao gjaeoj aeoj oae e gjoaej goae aegjoa",
+				"Miaou");
+			UpdateMailInfos(email);
+		}
 
-        private Transform _textArea;
-        private TMP_Text _addressPlaceholder;
-        private TMP_Text _headerPlaceholder;
-        private TMP_Text _bodyPlaceholder;
-        private TMP_Text _footerPlaceholder;
-        private void Start()
-        {
-            _textArea = transform.Find("ScrollableArea").Find("TextArea");
-            _addressPlaceholder = _textArea.Find("Address").GetComponent<TMP_Text>();
-            _headerPlaceholder = _textArea.Find("Header").GetComponent<TMP_Text>();
-            _bodyPlaceholder = _textArea.Find("Body").GetComponent<TMP_Text>();
-            _footerPlaceholder = _textArea.Find("Footer").GetComponent<TMP_Text>();
-            GameObject truc = new GameObject();
-            truc.transform.parent = transform;
-            truc.name = "Miaou";
-        }
-
-        public void UpdateMailInfos(Data.Email email)
-        {
-            _addressPlaceholder.text = email.address;
-            _headerPlaceholder.text = email.header;
-            _bodyPlaceholder.text = email.body;
-            _footerPlaceholder.text = email.footer;
-            
-            Vector2 bodyPlaceholderPosition = _bodyPlaceholder.transform.position;
-            bodyPlaceholderPosition.y = _headerPlaceholder.preferredHeight + bodyPaddingTop;
-            _bodyPlaceholder.transform.position = bodyPlaceholderPosition;
-            
-            Vector2 footerPlaceholderPosition = _footerPlaceholder.transform.position;
-            bodyPlaceholderPosition.y = _bodyPlaceholder.preferredHeight + footerPaddingTop;
-            _footerPlaceholder.transform.position = footerPlaceholderPosition;
-        }
-    }
+		/// <summary>
+		/// change l'apparence de l'e-mail
+		/// </summary>
+		/// <param name="email">l'e-mail à afficher</param>
+		public void UpdateMailInfos(Email email)
+		{
+			// update content
+			addressTMPText.text = email.address;
+			headerTMPText.text = email.header;
+			bodyTMPText.text = email.body;
+			footerTMPText.text = email.footer;
+			
+			// force the update of the textArea
+			Canvas.ForceUpdateCanvases();
+			textArea.enabled = false;
+			textArea.enabled = true;
+		}
+	}
 }
