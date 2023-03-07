@@ -6,8 +6,6 @@ using UnityEngine.EventSystems;
 public class interactionObjet : MonoBehaviour
 {
 
-    public GameObject trace_Verte;
-    public GameObject trace_Rouge;
     [SerializeField]
     private Canvas canvas;
     Vector2 positionBase;

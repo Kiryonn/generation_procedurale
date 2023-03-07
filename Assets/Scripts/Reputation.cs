@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// classe qui gère la réputation 
 /// </summary>
 public class Reputation : MonoBehaviour
 {
-    public int reputation=100;
-    public int reputationMax=100;
-    public ReputationBar reputationBar;
+    public float reputation=100f;
+    //public int reputationMax;
+    public Slider reputationSlider;
 
 
     /// <summary>
@@ -17,7 +19,8 @@ public class Reputation : MonoBehaviour
     /// </summary>
     void Start()
     {
-        UpdateBar();
+        //reputation = reputation*1f;
+        reputationSlider.maxValue = reputation;
     }
 
     /// <summary>
@@ -28,19 +31,24 @@ public class Reputation : MonoBehaviour
     {
         reputation += n;
 
-        if (reputation > reputationMax) { reputation=reputationMax; }
-        if (reputation <=0) { GameOver(); reputation = 0; }
-        UpdateBar();
+        
+        if (reputation <=0) {
+            reputation = 0;
+            GameOver();
+        }
+        else { UpdateBar(); }
+
+        
         
 
     }
 
     /// <summary>
-    /// afiche la repution actuel sur la barre 
+    /// actualise le slider
     /// </summary>
     void UpdateBar()
     {
-        reputationBar.SetRepution((0f+reputation)/reputationMax);
+        reputationSlider.value = reputation;
     }
 
     /// <summary>
@@ -48,7 +56,7 @@ public class Reputation : MonoBehaviour
     /// </summary>
     void GameOver()
     {
-        //To do
+        //todo
     }
 
 }
