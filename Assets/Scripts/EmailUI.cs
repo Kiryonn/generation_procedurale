@@ -1,45 +1,42 @@
 ﻿using Data;
 using TMPro;
-using Unity.VisualScripting;
+
 using UnityEngine;
-using UnityEngine.Serialization;
+
 using UnityEngine.UI;
 
 namespace UI
 {
 	public class EmailUI: MonoBehaviour
 	{
+		[SerializeField] private Scrollbar scrollbar;
 		[SerializeField] private VerticalLayoutGroup textArea;
 		[SerializeField] private TMP_Text addressTMPText;
 		[SerializeField] private TMP_Text headerTMPText;
 		[SerializeField] private TMP_Text bodyTMPText;
 		[SerializeField] private TMP_Text footerTMPText;
-		private void Start()
-		{
-			Email email = new Email(
-				"miaou1234@gmail.com",
-				"Bonjour,",
-				"Ceci est un texte qui n'a aucun sens. Ne lisez pas. Non vraiment y a rien a lire. Pourquoi tu lis ? T'es con ou quoi ? egaegaehae heearhea ej aeoijg oaej jeao gjaeoj aeoj oae e gjoaej goae aegjoa",
-				"Miaou");
-			UpdateMailInfos(email);
-		}
+
 
 		/// <summary>
-		/// change l'apparence de l'e-mail
+		/// updates the content and display of the e-mail
 		/// </summary>
-		/// <param name="email">l'e-mail à afficher</param>
+		/// <param name="email">the e-mail to display</param>
 		public void UpdateMailInfos(Email email)
 		{
-			// update content
+			// update e-mail content
 			addressTMPText.text = email.address;
 			headerTMPText.text = email.header;
 			bodyTMPText.text = email.body;
 			footerTMPText.text = email.footer;
 			
 			// force the update of the textArea
+			// EXTREMELY IMPORTANT DO NOT TOUCH
 			Canvas.ForceUpdateCanvases();
 			textArea.enabled = false;
 			textArea.enabled = true;
+			
+			// scroll to the top of the letter
+			scrollbar.value = 1;
 		}
 	}
 }
