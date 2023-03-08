@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// afiche l'écran de fin de partie
@@ -13,11 +9,11 @@ public class GameOver : MonoBehaviour
 
     public GameObject CanvasEnd;
     public void defeat()
-    { canvas.transform.gameObject.SetActive(false);
+    {
+        canvas.transform.gameObject.SetActive(false);
         GameObject t = Instantiate(CanvasEnd);
     }
-    
-    public void victory() 
+    public void victory()
     { }
 
 }
