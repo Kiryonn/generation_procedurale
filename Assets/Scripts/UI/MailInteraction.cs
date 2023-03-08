@@ -55,6 +55,7 @@ public class MailInteraction : MonoBehaviour
     public void enterPointerRight(BaseEventData data)
     {
         EmailDisplay = true;
+        Debug.Log("true");
     }
 
     /// <summary>
@@ -64,6 +65,7 @@ public class MailInteraction : MonoBehaviour
     public void enterPointerLeft(BaseEventData data)
     {
         EmailDisplay = false;
+        Debug.Log("false");
     }
 
 
