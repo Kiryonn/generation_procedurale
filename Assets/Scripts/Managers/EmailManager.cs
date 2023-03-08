@@ -54,10 +54,9 @@ namespace Managers {
 				var rulesCopy = rules;
 				var fileRulesCopy = fileRules;
 
-				while (areRulesValid) {
-					if (rulesCopy == fileRulesCopy) break;
-					if (rulesCopy == 0 || fileRulesCopy == 0) { areRulesValid = rulesCopy > fileRulesCopy; break; }
-					if (rulesCopy % 2 < fileRulesCopy % 2) { areRulesValid = false; continue; }
+				while (areRulesValid || rulesCopy == fileRulesCopy) {
+					if (rulesCopy == 0 || fileRulesCopy == 0) { areRulesValid = rulesCopy >= fileRulesCopy; break; }
+					if ((rulesCopy & 1) < (fileRulesCopy & 1)) { areRulesValid = false; continue; }
 					rulesCopy >>= 1;
 					fileRulesCopy >>= 1;
 				}
