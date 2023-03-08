@@ -19,43 +19,37 @@ Cela permetra (si ont à le temps) de laisser aux joueurs controler les exercice
 | 11     |                   1011 |   règles 1,2,4 actives |
 | 15     |                   1111 | règles 1,2,3,4 actives |
 
+Un outil très utile si vous avez du mal avec le binaire est la calculatrice de Windows.
+![img.png](img.png)
+![img2.png](img2.png)
+![img3.png](img3.png)
+![img4.png](img4.png)
 
 ## Construction des fichiers emails
 
-- Les fichiers seront dans Data/Emails/
+- Les fichiers seront dans Data/Emails/context/
 - Les fichiers seront nommé selon les règles actives mentioné si dessus 
   - <i>exemples: 0.json, 5.json, 11.json, 15.json</i>
+  - ![img5.png](img5.png)
 - Les fichiers seont construits tel que:
-```json5
-{
-  "any": { // type de contenu du mail
-    "addresses": {
-      "valid": [], // liste des emails valides
-      "invalid": [] // liste des email invalides
-    },
-    "header": {
-      "valid": [],  // les sujets de mail valides
-      "invalid": [] // sujets invalides
-    },
-    "body": {
-     "valid": [],  // contenu des e-mail valides
-     "invalid": [] // contenu invalide
-    },
-    "footer": {
-      "valid": [],  // remerciements, coordonées, ...
-      "invalid": [] // la même mais invalide
-    }
-  },
-  "art": {  // type de contenu
-    ...
-  }
-}
-```
 
-## Construction du fichier tags.json
-
-liste de type de contenu accepté par les fichiers email.
-Le programme renverra une erreure et ignorera la catégorie si un type non mentionné dans ce fichier est trouvé pour éviter tout futurs problèmes
 ```json
-["any", "art", "game", ...]
+{
+	"addresses": {
+		"valid": [],
+		"invalid": []
+	},
+	"header": {
+		"valid": [],
+		"invalid": []
+	},
+	"body": {
+		"valid": [],
+		"invalid": []
+	},
+	"footer": {
+		"valid": [],
+		"invalid": []
+	}
+}
 ```
