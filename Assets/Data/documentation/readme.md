@@ -28,9 +28,9 @@ Un outil très utile si vous avez du mal avec le binaire est la calculatrice de 
 ## Construction des fichiers emails
 
 - Les fichiers seront dans Data/Emails/context/
+  - ![img5.png](img5.png)
 - Les fichiers seront nommé selon les règles actives mentioné si dessus 
   - <i>exemples: 0.json, 5.json, 11.json, 15.json</i>
-  - ![img5.png](img5.png)
 - Les fichiers seont construits tel que:
 
 ```json
