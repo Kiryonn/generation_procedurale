@@ -1,0 +1,18 @@
+﻿{
+	"addresses": {
+		"valid": [],
+		"invalid": []
+	},
+	"header": {
+		"valid": [],
+		"invalid": []
+	},
+	"body": {
+		"valid": [],
+		"invalid": []
+	},
+	"footer": {
+		"valid": [],
+		"invalid": []
+	}
+}
