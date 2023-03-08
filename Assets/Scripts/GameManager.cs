@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public float perteReputation;
     public GameObject email;
     public MailInteraction mail;
-
     public Email[] listEmail;
 
     private void Start()
@@ -46,6 +45,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            currentMail += 1;
+            if(currentMail== listEmail.Length) { reputation.win(); }
+
             mail.gameObject.SetActive(true);
             email.SetActive(false);
         }

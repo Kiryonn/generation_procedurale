@@ -7,13 +7,16 @@ public class GameOver : MonoBehaviour
 {
     public Canvas canvas;
 
-    public GameObject CanvasEnd;
+    public GameObject CanvasDefeat;
+    public GameObject CanvasVictory;
     public void defeat()
     {
         canvas.transform.gameObject.SetActive(false);
-        GameObject t = Instantiate(CanvasEnd);
+        GameObject t = Instantiate(CanvasDefeat);
     }
-    public void victory()
-    { }
+    public void victory(float n)
+    {
+        GameObject t = Instantiate(CanvasVictory); 
+    }
 
 }

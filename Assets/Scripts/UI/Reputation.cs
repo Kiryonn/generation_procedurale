@@ -61,4 +61,8 @@ public class Reputation : MonoBehaviour
 
     }
 
+    public void win()
+    {
+        gameOver.victory(reputation);
+    }
 }
