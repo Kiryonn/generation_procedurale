@@ -1,27 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
+using Data;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    int currentMail = 0;
+    private int currentMail = 0;
 
     private int jour;
     public Reputation reputation;
     public float perteReputation;
+    public GameObject email;
+    public MailInteraction mail;
 
+    public Email[] listEmail;
 
-
-    void Start()
+    private void Start()
     {
-        
+
     }
 
     /// <summary>
     /// l'utilisateur a dit que le mail est bon
     /// </summary>
-    public void valideMail() 
+    public void valideMail()
     {
         checkResult(true);
     }
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// l'utilisateur a dit que le mail n'est pas bon
     /// </summary>
-    public void refuseMail() 
+    public void refuseMail()
     {
         checkResult(false);
     }
@@ -38,17 +38,18 @@ public class GameManager : MonoBehaviour
     /// verifie si la reponse du joeur est bonne 
     /// </summary>
     /// <param name="playerResponse"> reponse du joeur </param>
-    void checkResult(bool playerResponse)
+    private void checkResult(bool playerResponse)
     {
-        if (mailGood(currentMail)!= playerResponse) 
+        if (mailGood(currentMail) != playerResponse)
         {
             reputation.addReputation(perteReputation);
         }
-        else 
+        else
         {
-            //todo
+            mail.gameObject.SetActive(true);
+            email.SetActive(false);
         }
-       
+
     }
 
     /// <summary>
@@ -56,11 +57,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="n">le numero du mail actuel</param>
     /// <returns></returns>
-    bool mailGood(int n)
-    { 
-    //todo
+    private bool mailGood(int n)
+    {
 
-    return true;
+        return true;
     }
 
 }
