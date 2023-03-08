@@ -5,10 +5,8 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
-namespace UI
-{
-	public class EmailUI: MonoBehaviour
-	{
+namespace UI {
+	public class EmailUI: MonoBehaviour {
 		[SerializeField] private Scrollbar scrollbar;
 		[SerializeField] private VerticalLayoutGroup textArea;
 		[SerializeField] private TMP_Text addressTMPText;
@@ -21,13 +19,12 @@ namespace UI
 		/// updates the content and display of the e-mail
 		/// </summary>
 		/// <param name="email">the e-mail to display</param>
-		public void UpdateMailInfos(Email email)
-		{
+		public void UpdateMailInfos(Email email) {
 			// update e-mail content
-			addressTMPText.text = email.address;
-			headerTMPText.text = email.header;
-			bodyTMPText.text = email.body;
-			footerTMPText.text = email.footer;
+			addressTMPText.text = email.Address;
+			headerTMPText.text = email.Header;
+			bodyTMPText.text = email.Body;
+			footerTMPText.text = email.Footer;
 			
 			// force the update of the textArea
 			// EXTREMELY IMPORTANT DO NOT TOUCH
