@@ -2,17 +2,19 @@
 {
 	public class Email
 	{
-		public string address;
-		public string header;
-		public string body;
-		public string footer;
+		public readonly string Address;
+		public readonly string Header;
+		public readonly string Body;
+		public readonly string Footer;
+		public readonly bool IsPhishing;
 
-		public Email(string address, string header, string body, string footer)
+		public Email(string address, string header, string body, string footer, bool isPhishing)
 		{
-			this.address = address;
-			this.header = header;
-			this.body = body;
-			this.footer = footer;
+			this.Address = address;
+			this.Header = header;
+			this.Body = body;
+			this.Footer = footer;
+			this.IsPhishing = isPhishing;
 		}
 	}
 }
