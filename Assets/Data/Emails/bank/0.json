@@ -1,18 +1,34 @@
 ﻿{
 	"addresses": {
-		"valid": [],
-		"invalid": []
+		"valid": [
+			"aa"
+		],
+		"invalid": [
+			"ab"
+		]
 	},
-	"header": {
-		"valid": [],
-		"invalid": []
+	"headers": {
+		"valid": [
+			"ba"
+		],
+		"invalid": [
+			"bb"
+		]
 	},
-	"body": {
-		"valid": [],
-		"invalid": []
+	"bodies": {
+		"valid": [
+			"ca"
+		],
+		"invalid": [
+			"cb"
+		]
 	},
-	"footer": {
-		"valid": [],
-		"invalid": []
+	"footers": {
+		"valid": [
+			"da"
+		],
+		"invalid": [
+			"db"
+		]
 	}
 }
