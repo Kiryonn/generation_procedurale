@@ -25,10 +25,6 @@ namespace Managers {
 				Instance = this;
 		}
 
-		private void Start() {
-			CreateEMail(1);
-		}
-
 		/// <summary>
 		/// Generate a brand new e-mail (data)
 		/// </summary>
