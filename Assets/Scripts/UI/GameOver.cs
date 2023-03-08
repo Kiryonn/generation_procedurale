@@ -4,6 +4,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// afiche l'écran de fin de partie
+/// </summary>
 public class GameOver : MonoBehaviour
 {
     public Canvas canvas;

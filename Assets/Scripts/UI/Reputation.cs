@@ -56,7 +56,7 @@ public class Reputation : MonoBehaviour
 	}
 
 	/// <summary>
-	/// a faire
+	/// apel la fin de partie defeat
 	/// </summary>
 	void GameOver()
 	{

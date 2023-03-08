@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// inverse l'etat du game objet quand on click 
+/// </summary>
 public class interactionDocument : MonoBehaviour
 {
 
@@ -10,19 +13,21 @@ public class interactionDocument : MonoBehaviour
     //private Canvas canvas;
     //Vector2 positionBase;
 
-    public interactionDocument autreEtat;
+    public GameObject autreEtat;
+    bool isActif;
 
     private void Start()
     {
-        
+        isActif = false;
+
         //positionBase=transform.position;
     }
 
     public void Click(BaseEventData data)
     {
-
-        autreEtat.transform.gameObject.SetActive(true);
-        gameObject.SetActive(false);
+        isActif = !isActif;
+        autreEtat.SetActive(isActif);
+        
 
 
     }
