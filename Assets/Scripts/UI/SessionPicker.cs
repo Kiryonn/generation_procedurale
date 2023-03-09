@@ -6,10 +6,11 @@ namespace UI
 {
 	public class SessionPicker : MonoBehaviour
 	{
+		[SerializeField]
 		private Button _play;
 		private void Start()
 		{
-			_play = GetComponent<Button>();
+			//_play = GetComponent<Button>();
 			_play.interactable = false;
 		}
 

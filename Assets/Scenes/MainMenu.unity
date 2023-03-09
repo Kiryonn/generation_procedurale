@@ -425,13 +425,13 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: cb7e28566ef00c14bb5eb398b590925c, type: 3}
 --- !u!114 &821387888 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3004571979790892773, guid: cb7e28566ef00c14bb5eb398b590925c, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8848502855801161644, guid: cb7e28566ef00c14bb5eb398b590925c, type: 3}
   m_PrefabInstance: {fileID: 821387887}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58f2b337daab97b4d8a823e61e2c7357, type: 3}
+  m_Script: {fileID: 11500000, guid: 20a9b3f0b1a858741855372a17549177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &874938365
@@ -654,13 +654,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 821387888}
-        m_TargetAssemblyTypeName: loaderScenes, Assembly-CSharp
+        m_TargetAssemblyTypeName: Managers.SceneLoaderManager, Assembly-CSharp
         m_MethodName: LoadGame
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1036,6 +1036,7 @@ GameObject:
   - component: {fileID: 1225157746}
   - component: {fileID: 1225157745}
   - component: {fileID: 1225157744}
+  - component: {fileID: 1225157747}
   m_Layer: 5
   m_Name: Quitter
   m_TagString: Untagged
@@ -1107,19 +1108,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1225157745}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 821387888}
-        m_TargetAssemblyTypeName: loaderScenes, Assembly-CSharp
-        m_MethodName: ApplicationQuit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1225157745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1158,6 +1147,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1225157742}
   m_CullTransparentMesh: 1
+--- !u!114 &1225157747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225157742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45b71055d54345b4a23c63d92a068216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1332539649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,7 +1396,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 821387888}
-        m_TargetAssemblyTypeName: loaderScenes, Assembly-CSharp
+        m_TargetAssemblyTypeName: Managers.SceneLoaderManager, Assembly-CSharp
         m_MethodName: LoadMenuSession
         m_Mode: 1
         m_Arguments:

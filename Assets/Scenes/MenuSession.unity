@@ -1129,8 +1129,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1649704588}
-        m_TargetAssemblyTypeName: SessionManger, Assembly-CSharp
-        m_MethodName: LoadSession
+        m_TargetAssemblyTypeName: UI.SessionPicker, Assembly-CSharp
+        m_MethodName: OnButtonPlayPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1717,9 +1717,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1352936514}
-        m_TargetAssemblyTypeName: loaderScenes, Assembly-CSharp
-        m_MethodName: LoadMenuPrincipale
+      - m_Target: {fileID: 3004571978442150568}
+        m_TargetAssemblyTypeName: Managers.SceneLoaderManager, Assembly-CSharp
+        m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1843,17 +1843,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332539649}
   m_CullTransparentMesh: 1
---- !u!114 &1352936514 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3004571979790892773, guid: cb7e28566ef00c14bb5eb398b590925c, type: 3}
-  m_PrefabInstance: {fileID: 3004571978442150567}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58f2b337daab97b4d8a823e61e2c7357, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1380532755
 GameObject:
   m_ObjectHideFlags: 0
@@ -2157,8 +2146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fbab54fb0dcaa846a1e1e3cade5966c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  play: {fileID: 985756617}
-  loadScene: {fileID: 1352936514}
 --- !u!4 &1649704589
 Transform:
   m_ObjectHideFlags: 0
@@ -2981,3 +2968,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb7e28566ef00c14bb5eb398b590925c, type: 3}
+--- !u!114 &3004571978442150568 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8848502855801161644, guid: cb7e28566ef00c14bb5eb398b590925c, type: 3}
+  m_PrefabInstance: {fileID: 3004571978442150567}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a9b3f0b1a858741855372a17549177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
