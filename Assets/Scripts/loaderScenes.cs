@@ -11,7 +11,7 @@ public class loaderScenes : MonoBehaviour
     {
         SceneManager.LoadScene("game");
     }
-
+     
         public void LoadMenuPrincipale()
     {
         SceneManager.LoadScene("menuPrincipale");
