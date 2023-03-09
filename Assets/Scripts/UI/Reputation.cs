@@ -1,68 +1,29 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-/// <summary>
-/// classe qui gère la réputation 
-/// </summary>
-public class Reputation : MonoBehaviour
+namespace UI
 {
-    public float reputation = 100f;
-    //public int reputationMax;
-    public Slider reputationSlider;
-    public GameOver gameOver;
-
-
-    /// <summary>
-    /// a faire
-    /// </summary>
-    private void Start()
+    public class Reputation : MonoBehaviour
     {
-        //reputation = reputation*1f;
-        reputationSlider.maxValue = reputation;
-        reputationSlider.value = reputation;
-    }
+        public float maxReputation = 100f;
+        public Slider reputationSlider;
 
-    /// <summary>
-    /// ajoute une valeur a la reputation 
-    /// </summary>
-    /// <param name="n">valeur a ajoutée a la reputation actuel</param>
-    public void addReputation(float n)
-    {
-        reputation += n;
-
-
-        if (reputation <= 0)
+        private void Start()
         {
-            reputation = 0;
-            UpdateBar();
-            GameOver();
+            reputationSlider.maxValue = maxReputation;
+            reputationSlider.value = maxReputation;
         }
-        else { UpdateBar(); }
 
-
-
-
-    }
-
-    /// <summary>
-    /// actualise le slider
-    /// </summary>
-    private void UpdateBar()
-    {
-        reputationSlider.value = reputation;
-    }
-
-    /// <summary>
-    /// apel la fin de partie defeat
-    /// </summary>
-    private void GameOver()
-    {
-        gameOver.defeat();
-
-    }
-
-    public void win()
-    {
-        gameOver.victory(reputation);
+        public void AddReputation(float n)
+        {
+            maxReputation += n;
+            if (maxReputation <= 0)
+            {
+                maxReputation = 0;
+                Managers.GameManager.Instance.Defeat();
+            }
+            reputationSlider.value = maxReputation;
+        }
     }
 }

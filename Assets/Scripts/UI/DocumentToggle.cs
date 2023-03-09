@@ -7,18 +7,18 @@ using UnityEngine.EventSystems;
 public class DocumentToggle : MonoBehaviour
 {
 
-    private GameObject hide;
-    private bool isActif;
+    private GameObject _toHide;
+    private bool _isActive;
 
     private void Start()
     {
-        isActif = false;
+        _isActive = false;
     }
 
-    public void Click(BaseEventData data)
+    public void Click()
     {
-        isActif = !isActif;
-        hide.SetActive(isActif);
+        _isActive = !_isActive;
+        _toHide.SetActive(_isActive);
     }
 
 }
