@@ -16,7 +16,7 @@ public class GameOver : MonoBehaviour
     }
     public void victory(float n)
     {
-        GameObject t = Instantiate(CanvasVictory); 
+        GameObject t = Instantiate(CanvasVictory);
     }
 
 }
