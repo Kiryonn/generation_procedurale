@@ -346,7 +346,7 @@ PrefabInstance:
     - target: {fileID: 6523534956638775650, guid: 086ccc845a665824683e0ecbe2f1473f, type: 3}
       propertyPath: gameOver
       value: 
-      objectReference: {fileID: 348822616}
+      objectReference: {fileID: 0}
     - target: {fileID: 6523534956638775650, guid: 086ccc845a665824683e0ecbe2f1473f, type: 3}
       propertyPath: reputation
       value: 100
@@ -942,7 +942,6 @@ GameObject:
   m_Component:
   - component: {fileID: 348822618}
   - component: {fileID: 348822617}
-  - component: {fileID: 348822616}
   - component: {fileID: 348822619}
   m_Layer: 0
   m_Name: GameManager
@@ -951,21 +950,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &348822616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348822615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd4b2dac19fb4a348922fba4b76bce32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 1075220641}
-  CanvasDefeat: {fileID: 0}
-  CanvasVictory: {fileID: 0}
 --- !u!114 &348822617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,8 +965,10 @@ MonoBehaviour:
   reputation: {fileID: 222485138}
   reputationLoss: 0
   reputationGain: 0
+  gameScreen: {fileID: 0}
+  victoryScreen: {fileID: 0}
+  defeatScreen: {fileID: 0}
   email: {fileID: 432030235}
-  mail: {fileID: 251774046}
 --- !u!4 &348822618
 Transform:
   m_ObjectHideFlags: 0
@@ -1992,7 +1978,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 251774046}
           m_TargetAssemblyTypeName: MailInteraction, Assembly-CSharp
-          m_MethodName: enterPointerLeft
+          m_MethodName: EnterLeftArea
           m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2662,7 +2648,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 251774046}
           m_TargetAssemblyTypeName: MailInteraction, Assembly-CSharp
-          m_MethodName: enterPointerRight
+          m_MethodName: EnterRightArea
           m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

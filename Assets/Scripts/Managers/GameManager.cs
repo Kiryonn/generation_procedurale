@@ -1,7 +1,8 @@
-using System;
+using System.IO;
 using Data;
 using UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Managers
 {
@@ -13,7 +14,6 @@ namespace Managers
 		public float reputationLoss;
 		public float reputationGain;
 		[Header("Screens")]
-		public Canvas gameScreen;
 		public GameObject victoryScreen;
 		public GameObject defeatScreen;
 		[Header("E-mail")]
@@ -28,18 +28,16 @@ namespace Managers
 
 		private void Start()
 		{
-			var daysPath = Application.dataPath;
-			Debug.Log(daysPath);
-			// daysPath += "Data/difficulties.json";
+			var daysPath = Application.dataPath + "/Data/difficulties.json";
+			var days = JsonUtility.FromJson<int[]>(File.ReadAllText(daysPath));
 			var currentDay = PlayerPrefs.GetInt("Session");
-			// days = JsonUtility.FromJson<int[]>(File.ReadAllText(daysPath));
 		}
 
 		/// <summary>
 		/// Check if the player is right or wrong and update the reputation accordingly.
 		/// </summary>
 		/// <param name="playerAnswer">Did the player listed the e-mail as phishing or not.</param>
-		private void CheckResult(bool playerAnswer)
+		public void CheckResult(bool playerAnswer)
 		{
 			Email currentMail = _sessionEmails[^1];
 			var isPlayerCorrect = playerAnswer == currentMail.IsPhishing;
@@ -53,8 +51,12 @@ namespace Managers
 	
 		public void Defeat()
 		{
-			gameScreen.gameObject.SetActive(false);
 			Instantiate(defeatScreen);
+		}
+
+		public void GoToMainMenu()
+		{
+			SceneManager.LoadScene("MainMenu");
 		}
 	}
 }
