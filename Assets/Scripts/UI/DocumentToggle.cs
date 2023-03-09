@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// afiche la documentation ou la chache quand on clique sur l'objet
@@ -7,7 +8,7 @@ using UnityEngine.EventSystems;
 public class DocumentToggle : MonoBehaviour
 {
 
-    private GameObject _toHide;
+    public GameObject toHide;
     private bool _isActive;
 
     private void Start()
@@ -18,7 +19,7 @@ public class DocumentToggle : MonoBehaviour
     public void Click()
     {
         _isActive = !_isActive;
-        _toHide.SetActive(_isActive);
+        toHide.SetActive(_isActive);
     }
 
 }
