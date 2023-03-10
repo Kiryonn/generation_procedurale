@@ -1708,7 +1708,6 @@ GameObject:
   - component: {fileID: 8976888213945964883}
   - component: {fileID: 5056911956000195984}
   - component: {fileID: 7539489017992318830}
-  - component: {fileID: 8757689485585561099}
   m_Layer: 7
   m_Name: Email
   m_TagString: Untagged
@@ -1780,15 +1779,3 @@ MonoBehaviour:
   droppableAreas:
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &8757689485585561099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8976888213945964908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f4ff9e30cd04cb8980e4d9943d60f40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
