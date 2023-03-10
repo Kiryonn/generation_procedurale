@@ -14,6 +14,7 @@ public class Tampon : MonoBehaviour
     public Image top;
     public Image front;
     private Vector2 basePosition;
+    public RectTransform rectTransformToCheck;
 
 
     private void Start()
@@ -39,6 +40,36 @@ public class Tampon : MonoBehaviour
     {
         top.gameObject.SetActive(false);
         front.gameObject.SetActive(true);
+         
+
+        /*
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+        (RectTransform)canvas.transform,
+        ((PointerEventData)data).position,
+        canvas.worldCamera,
+        out Vector2 position);
+
+        Debug.Log("position: " + position.x);
+        var isEmailVisible = rightArea.rect.Contains(position);*/
+
+        PointerEventData eventData = (PointerEventData)data;
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            rectTransformToCheck,
+            eventData.position, 
+            eventData.pressEventCamera, 
+            out Vector2 localPoint);
+
+        if (rectTransformToCheck.rect.Contains(localPoint))
+        {
+            Debug.Log("mail validée");
+        }
+        else
+        {
+            Debug.Log("mail refusée");
+        }
+
 
         transform.position = basePosition;
     }
