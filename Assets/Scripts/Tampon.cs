@@ -63,12 +63,9 @@ public class Tampon : MonoBehaviour
 
         if (rectTransformToCheck.rect.Contains(localPoint))
         {
-            Debug.Log("mail validée");
+            //Debug.Log("mail validée");
         }
-        else
-        {
-            Debug.Log("mail refusée");
-        }
+
 
 
         transform.position = basePosition;
