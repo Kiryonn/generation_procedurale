@@ -14,13 +14,17 @@ namespace Managers
 		public float reputationLoss;
 		public float reputationGain;
 		[Header("Screens")]
-		public GameObject victoryScreen;
-		public GameObject defeatScreen;
-		[Header("E-mail")]
+		[SerializeField]
+        private EndGame endGame;
+        [SerializeField]
+        private GameObject game;
+        [Header("E-mail")]
 		public EmailUI email;
 		private Email[] _sessionEmails;
+		private int currentDay;
 
-		private void Awake()
+
+        private void Awake()
 		{
 			if (Instance == null)
 				Instance = this;
@@ -30,7 +34,7 @@ namespace Managers
 		{
 			var daysPath = Application.dataPath + "/Data/difficulties.json";
 			var days = JsonUtility.FromJson<int[]>(File.ReadAllText(daysPath));
-			var currentDay = PlayerPrefs.GetInt("Session");
+			currentDay = PlayerPrefs.GetInt("Session");
 		}
 
 		/// <summary>
@@ -46,17 +50,33 @@ namespace Managers
 	
 		public void Victory()
 		{
-			Instantiate(victoryScreen); 
-		}
+			endGame.gameObject.SetActive(true);
+			game.SetActive(false);// normalent pas besoin mais evite davoir trop d'objet actif en meme temps inutilment  
+
+        }
 	
 		public void Defeat()
 		{
-			Instantiate(defeatScreen);
-		}
+            endGame.gameObject.SetActive(true);
+            game.SetActive(false);
+            currentDay -= 1;
+            endGame.Defeat();
+        }
 
 		public void GoToMainMenu()
 		{
 			SceneManager.LoadScene("MainMenu");
-		}
-	}
+			
+        }
+
+		public void nextDay() 
+		{
+			currentDay += 1;
+            endGame.gameObject.SetActive(false);
+            game.SetActive(true);
+			//plus reste de la page
+        }
+
+
+    }
 }
