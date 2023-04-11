@@ -18,16 +18,15 @@ namespace UI
 		[SerializeField] private TMP_Text footerTMPText;
 
 		[Space] [Header("Drop stuff")]
-		[SerializeField] private RectTransform[] droppableAreas = new RectTransform[2];
-		private RectTransform _currentPlaceHolder;
-		private bool _isMailReadable = false;
+		[SerializeField] private RectTransform[] openAreas;
+		[SerializeField] private RectTransform[] closeAreas;
+		private bool _isMailReadable;
 		private RectTransform _letter;
 		private RectTransform _warp;
 
-		private void Start() {
+		private void Awake() {
 			_letter = transform.Find("Open").GetComponent<RectTransform>();
 			_warp = transform.Find("Close").GetComponent<RectTransform>();
-			_currentPlaceHolder = droppableAreas[0];
 		}
 
 		/// <summary>
@@ -71,22 +70,24 @@ namespace UI
 
 		public void OnEndDrag(PointerEventData eventData) {
 			// check if there is a restriction
-			if (droppableAreas.Length == 0) return;
-
-			// Check if the e-mail is dropped above one of the droppableAreas
-			foreach (RectTransform droppableArea in droppableAreas) {
-				if (!RectTransformUtility.RectangleContainsScreenPoint(droppableArea,eventData.position, canvas.worldCamera)) continue;
-				if (_currentPlaceHolder == droppableArea) return;
-				_currentPlaceHolder = droppableArea;
-				Toggle();
-
-				if (_isMailReadable) return;
+			foreach (RectTransform droppableArea in closeAreas) {
+				if (!CheckPosition(droppableArea, eventData)) continue;
+				if (!_isMailReadable) return;
+				Close();
 				_warp.position = droppableArea.position;
 				return;
 			}
-
-			// return the e-mail to its original position
+			foreach (RectTransform droppableArea in openAreas) {
+				if (!CheckPosition(droppableArea, eventData)) continue;
+				if (_isMailReadable) return;
+				Open();
+				return;
+			}
 			rectTransform.anchoredPosition = originalPosition;
+		}
+
+		private bool CheckPosition(RectTransform area, PointerEventData eventData) {
+			return RectTransformUtility.RectangleContainsScreenPoint(area, eventData.position, canvas.worldCamera);
 		}
 	}
 }

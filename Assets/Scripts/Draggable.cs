@@ -8,7 +8,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler
 	[NonSerialized] public Canvas canvas;
 	[NonSerialized] public Vector2 originalPosition;
 
-	private void Awake()
+	private void Start()
 	{
 		rectTransform = GetComponent<RectTransform>();
 		canvas = GetComponentInParent<Canvas>();

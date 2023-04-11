@@ -1509,8 +1509,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 352095376}
     m_Modifications:
+    - target: {fileID: 1067815175095793997, guid: 762e8b8a8bedf3d48a14c4576b68fe50, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806066601182223052, guid: 762e8b8a8bedf3d48a14c4576b68fe50, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455414149953221781, guid: 762e8b8a8bedf3d48a14c4576b68fe50, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7539489017992318830, guid: 762e8b8a8bedf3d48a14c4576b68fe50, type: 3}
       propertyPath: _currentPlaceHolder
+      value: 
+      objectReference: {fileID: 1814802315}
+    - target: {fileID: 7539489017992318830, guid: 762e8b8a8bedf3d48a14c4576b68fe50, type: 3}
+      propertyPath: openAreas.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7539489017992318830, guid: 762e8b8a8bedf3d48a14c4576b68fe50, type: 3}
+      propertyPath: closeAreas.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7539489017992318830, guid: 762e8b8a8bedf3d48a14c4576b68fe50, type: 3}
+      propertyPath: openAreas.Array.data[0]
+      value: 
+      objectReference: {fileID: 265721554}
+    - target: {fileID: 7539489017992318830, guid: 762e8b8a8bedf3d48a14c4576b68fe50, type: 3}
+      propertyPath: closeAreas.Array.data[0]
       value: 
       objectReference: {fileID: 1814802315}
     - target: {fileID: 7539489017992318830, guid: 762e8b8a8bedf3d48a14c4576b68fe50, type: 3}
@@ -2121,8 +2149,8 @@ MonoBehaviour:
   reputation: {fileID: 496921162}
   reputationLoss: 0
   reputationGain: 0
-  victoryScreen: {fileID: 0}
   defeatScreen: {fileID: 0}
+  game: {fileID: 0}
   email: {fileID: 1387524783}
 --- !u!4 &1868807081
 Transform:
