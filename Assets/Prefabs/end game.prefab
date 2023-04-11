@@ -1059,6 +1059,8 @@ MonoBehaviour:
   nextDayTextButon: {fileID: 7975315048391913973}
   nombreErreu: {fileID: 792459253142959504}
   currentErreu: {fileID: 7840066679872185910}
+  mainMenu: {fileID: 2696537090214244967}
+  suivant: {fileID: 8469017196381236564}
 --- !u!114 &792779505649083863
 MonoBehaviour:
   m_ObjectHideFlags: 0

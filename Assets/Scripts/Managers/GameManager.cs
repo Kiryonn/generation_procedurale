@@ -17,9 +17,7 @@ namespace Managers
 		public float reputationLoss;
 		public float reputationGain;
 		[Header("Screens")]
-		[SerializeField]
-        private GameObject defeatScreen;
-        private GameObject victoryScreen;
+        public EndGame endGame;
         [SerializeField]
         private GameObject game;
         [Header("E-mail")]
@@ -59,13 +57,18 @@ namespace Managers
 		}
 
 		public void Victory() {
-			Instantiate(victoryScreen); 
-		}
+            //Instantiate(victoryScreen);
+            endGame.gameObject.SetActive(true);
+            game.SetActive(false);
+            endGame.Victory();
+        }
 
 		public void Defeat() {
-            Instantiate(defeatScreen);
             currentDay -= 1;
-		}
+            endGame.gameObject.SetActive(true);
+            game.SetActive(false);
+			endGame.Defeat();
+        }
 
 		public void GoToMainMenu() {
 			SceneManager.LoadScene("MainMenu");
@@ -74,6 +77,10 @@ namespace Managers
 
 		public void nextDay() {
 			currentDay += 1;
+            endGame.gameObject.SetActive(false);
+            game.SetActive(true);
+			CreateNewEmail();
+			//plus reste de la page
         }
 
 		public void CreateNewEmail()

@@ -61,10 +61,10 @@ public class Tampon : MonoBehaviour
             eventData.pressEventCamera, 
             out Vector2 localPoint);
 
-        if (rectTransformToCheck.rect.Contains(localPoint))
+        /*if (rectTransformToCheck.rect.Contains(localPoint))
         {
             //Debug.Log("mail validée");
-        }
+        }*/
 
 
 
