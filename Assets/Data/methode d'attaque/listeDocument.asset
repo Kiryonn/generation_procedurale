@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc7a758457de9348a3ab95246617609, type: 3}
+  m_Name: listeDocument
+  m_EditorClassIdentifier: 
+  typeDeTechnique:
+  - Titre: fiche d'aide
+    text: "ici vous aurait des ficher pour avoir qu'elle tecnique est utilis\xE9e "
+  - Titre: "Le Phishing ou hame\xE7onnage, qu'est-ce que c'est ?"
+    text: "C'est une forme d'escroquerie, ayant pour but de recueillir vos informations
+      confidentielles.   La fraude est une r\xE9alit\xE9. Pour \xE9viter les risques,
+      nous vous recommandons d\u2019\xEAtre tr\xE8s prudent lorsque vous communiquez
+      vos informations personnelles, vos moyens de paiement ou vos mots de passe"
+  - Titre: 'bonne chance '
+    text: au boulot
