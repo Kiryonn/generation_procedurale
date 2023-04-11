@@ -18,7 +18,8 @@ namespace Managers
 		public float reputationGain;
 		[Header("Screens")]
 		[SerializeField]
-        private EndGame endGame;
+        private GameObject defeatScreen;
+        private GameObject victoryScreen;
         [SerializeField]
         private GameObject game;
         [Header("E-mail")]
@@ -41,7 +42,7 @@ namespace Managers
 			var daysPath = Application.dataPath + "/Data/difficulties.json";
 			var json = File.ReadAllText(daysPath);
 			var days = json.Substring(1, json.Length - 2).Split(",").Select(int.Parse).ToArray();
-			var currentDay = PlayerPrefs.GetInt("Session");
+			currentDay = PlayerPrefs.GetInt("Session");
 			_rules = days[currentDay];
 			CreateNewEmail();
 		}
@@ -62,11 +63,9 @@ namespace Managers
 		}
 
 		public void Defeat() {
-            endGame.gameObject.SetActive(true);
-            game.SetActive(false);
+            Instantiate(defeatScreen);
             currentDay -= 1;
-            endGame.Defeat();
-        }
+		}
 
 		public void GoToMainMenu() {
 			SceneManager.LoadScene("MainMenu");
@@ -75,9 +74,6 @@ namespace Managers
 
 		public void nextDay() {
 			currentDay += 1;
-            endGame.gameObject.SetActive(false);
-            game.SetActive(true);
-			//plus reste de la page
         }
 
 		public void CreateNewEmail()
