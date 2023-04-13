@@ -11,9 +11,9 @@ public class Hache : MonoBehaviour
 
     [SerializeField]
     private Canvas canvas;
-    public Image devant;
+    //public Image devant;
     private Vector2 basePosition;
-    public RectTransform rectTransformToCheck;
+    //public RectTransform rectTransformToCheck;
 
 
     private void Start()
@@ -24,7 +24,7 @@ public class Hache : MonoBehaviour
 
     public void DragHandler(BaseEventData data)
     {
-        devant.gameObject.SetActive(true);
+        //devant.gameObject.SetActive(true);
 
         PointerEventData pointerData = (PointerEventData)data;
         Vector2 position;
@@ -36,7 +36,7 @@ public class Hache : MonoBehaviour
 
     public void DropHandler(BaseEventData data)
     {
-        devant.gameObject.SetActive(false);
+        /*devant.gameObject.SetActive(false);
 
         PointerEventData eventData = (PointerEventData)data;
 
@@ -49,7 +49,7 @@ public class Hache : MonoBehaviour
         if (rectTransformToCheck.rect.Contains(localPoint))
         {
             //Debug.Log("mail valid�e");
-        }
+        }*/
 
 
 

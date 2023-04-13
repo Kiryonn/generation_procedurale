@@ -1,4 +1,6 @@
 using System;
+using Data;
+using System.Collections.Generic;
 using Managers;
 using TMPro;
 using UI;
@@ -15,12 +17,19 @@ public class EndGame : MonoBehaviour {
     public Button mainMenu;
     public Button next;
     private int _mailIndex = 1;
+    List<Email> Email;
 
     private void Start()
     {
         Canvas.ForceUpdateCanvases();
         gameObject.SetActive(false);
         gameObject.SetActive(true);
+    }
+
+    public void listEmail(List<Email> list) 
+    {
+        Email = list;
+        _mailIndex = Email.Count;
     }
 
     public void ActiveButton() {
@@ -58,6 +67,6 @@ public class EndGame : MonoBehaviour {
 
     private void UpdateMailReviewLabel()
     {
-        mailInfoLabel.text = $"Revue de mail ({_mailIndex}/4)";
+        //mailInfoLabel.text = $"Revue de mail ({_mailIndex}/4)";
     }
 }

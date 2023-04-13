@@ -1,4 +1,5 @@
 using Data;
+using Managers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class Tampon : MonoBehaviour
     public Image front;
     private Vector2 basePosition;
     public RectTransform rectTransformToCheck;
+    //public GameManager GameManager;
 
 
     private void Start()
@@ -66,8 +68,11 @@ public class Tampon : MonoBehaviour
             //Debug.Log("mail validée");
         }*/
 
+        //appel de la fonction de l'aparition de la cire
 
-
+        GameManager.Instance.mailValider(true);
         transform.position = basePosition;
+
+       
     }
 }

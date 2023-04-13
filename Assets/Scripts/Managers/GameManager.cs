@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Data;
 using UI;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,14 +18,18 @@ namespace Managers
 		public float reputationLoss;
 		public float reputationGain;
 		[Header("Screens")]
-        public EndGame endGame;
-        [SerializeField]
-        private GameObject game;
-        [Header("E-mail")]
+		public EndGame endGame;
+		[SerializeField]
+		private GameObject game;
+		[Header("E-mail")]
 		public EmailUI email;
 		private Vector2 _emailOriginalPosition;
-		private Email[] _sessionEmails;
+		private List<Email> _sessionEmails;
 		private int currentDay;
+		private int currentMail;
+		[Header("nombre de mail")]
+		public int nbMailDay;
+		private bool end;
 
 		private int _rules;
 
@@ -42,25 +47,32 @@ namespace Managers
 			var days = json.Substring(1, json.Length - 2).Split(",").Select(int.Parse).ToArray();
 			currentDay = PlayerPrefs.GetInt("Session");
 			_rules = days[currentDay];
-			CreateNewEmail();
+			_sessionEmails = new List<Email>();
+            end=false;
+            currentMail = -1;
+            CreateNewEmail();
+
 		}
-		
+
 
 		/// <summary>
 		/// Check if the player is right or wrong and update the reputation accordingly.
 		/// </summary>
 		/// <param name="playerAnswer">Did the player listed the e-mail as phishing or not.</param>
 		public void CheckResult(bool playerAnswer) {
-			Email currentMail = _sessionEmails[^1];
-			var isPlayerCorrect = playerAnswer == currentMail.IsPhishing;
+			var isPlayerCorrect = playerAnswer == _sessionEmails[currentMail].IsPhishing;
 			reputation.AddReputation(isPlayerCorrect ? reputationLoss : reputationGain);
 		}
+
+
 
 		public void Victory() {
             //Instantiate(victoryScreen);
             endGame.gameObject.SetActive(true);
             game.SetActive(false);
             endGame.Victory();
+            end = true;
+			endGame.listEmail(_sessionEmails);
         }
 
 		public void Defeat() {
@@ -68,27 +80,41 @@ namespace Managers
             endGame.gameObject.SetActive(true);
             game.SetActive(false);
 			endGame.Defeat();
+            endGame.listEmail(_sessionEmails);
+            end = true;
+        }
+
+		public void mailValider(bool playerAnswer) {
+			Debug.Log("mail valider");
+			CheckResult(playerAnswer);
+			if (end) { return; }
+            if (_sessionEmails.Count == nbMailDay) { Victory(); }
+			else{CreateNewEmail();}
         }
 
 		public void GoToMainMenu() {
 			SceneManager.LoadScene("MainMenu");
-			
         }
 
 		public void nextDay() {
-			currentDay += 1;
+            end = false;
+			_sessionEmails = new List<Email>();
+            currentDay += 1;
             endGame.gameObject.SetActive(false);
             game.SetActive(true);
-			CreateNewEmail();
+            currentMail = -1;
+            CreateNewEmail();
 			//plus reste de la page
         }
 
-		public void CreateNewEmail()
-		{
-			email.gameObject.SetActive(false);
+        public void CreateNewEmail(){
+            currentMail++;
+            _sessionEmails.Add(EmailManager.Instance.CreateEMail(_rules));
+
+            email.gameObject.SetActive(false);
 			email.transform.position = _emailOriginalPosition;
 			email.Close();
-			email.UpdateMailInfos(EmailManager.Instance.CreateEMail(_rules));
+			email.UpdateMailInfos(_sessionEmails[currentMail]);
 			email.gameObject.SetActive(true);
 		}
 	}
