@@ -1,59 +1,63 @@
-using Data;
+using System;
 using Managers;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class EndGame : MonoBehaviour
-{
+public class EndGame : MonoBehaviour {
     public EmailUI email;
     public GameManager gameManager;
     public TextMeshProUGUI nextDayTextButon;
-    public TextMeshProUGUI nombreErreu;
-    public TextMeshProUGUI currentErreu;
+    public TMP_Text mailInfoLabel;
 
     public Button mainMenu;
-    public Button suivant;
+    public Button next;
+    private int _mailIndex = 1;
 
-    public void activeButon() 
+    private void Start()
     {
+        Canvas.ForceUpdateCanvases();
+        gameObject.SetActive(false);
+        gameObject.SetActive(true);
+    }
+
+    public void ActiveButton() {
         mainMenu.interactable = true;
-        suivant.interactable = true;
+        next.interactable = true;
     }
-    public void disabledButon() 
-    {
+    public void DisabledButton() {
         mainMenu.interactable = false;
-        suivant.interactable = false;
+        next.interactable = false;
     }
-    public void Defeat()
-    {
-        nextDayTextButon.text = "recomencée le niveau";
-        nombreErreu.text = "" + 4;
-        disabledButon();
+    public void Defeat() {
+        nextDayTextButon.text = "Recomencer le niveau";
+        UpdateMailReviewLabel();
+        DisabledButton();
     }
 
-    public void Victory()
-    {
+    public void Victory() {
         nextDayTextButon.text = "niveau suivant";
-        nombreErreu.text = "" + 4;
-        disabledButon();
+        UpdateMailReviewLabel();
+        DisabledButton();
     }
 
-        public void buttonNext() 
+    public void buttonNext()
     {
-        //chargée mail suivant
-        currentErreu.text = "" + 2;
-        activeButon();
+        _mailIndex++;
+        UpdateMailReviewLabel();
+        ActiveButton();
     }
 
-        public void buttonBack()
+    public void buttonBack()
     {
-        //chargée mail precendent 
-        currentErreu.text = "" + 1;
+        _mailIndex--;
+        UpdateMailReviewLabel();
     }
 
-
+    private void UpdateMailReviewLabel()
+    {
+        mailInfoLabel.text = $"Revue de mail ({_mailIndex}/4)";
+    }
 }
