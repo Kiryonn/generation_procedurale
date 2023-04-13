@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: listeDocument
   m_EditorClassIdentifier: 
   typeDeTechnique:
-  - Titre: fiche d'aide
-    text: "ici vous aurait des ficher pour avoir qu'elle tecnique est utilis\xE9e "
+  - Titre: Fiche d'aide
+    text: "Ici vous aurait des ficher pour avoir qu'elle tecnique est utilis\xE9e "
   - Titre: "Le Phishing ou hame\xE7onnage, qu'est-ce que c'est ?"
     text: "C'est une forme d'escroquerie, ayant pour but de recueillir vos informations
       confidentielles.   La fraude est une r\xE9alit\xE9. Pour \xE9viter les risques,
       nous vous recommandons d\u2019\xEAtre tr\xE8s prudent lorsque vous communiquez
       vos informations personnelles, vos moyens de paiement ou vos mots de passe"
-  - Titre: 'bonne chance '
-    text: au boulot
+  - Titre: 'Bonne chance '
+    text: Au boulot chevalier !
