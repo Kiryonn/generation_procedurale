@@ -16,7 +16,9 @@ public class EndGame : MonoBehaviour {
 
     public Button mainMenu;
     public Button next;
-    private int _mailIndex = 1;
+    public Button R;
+    public Button L;
+    private int _mailIndex = 0;
     List<Email> Email;
 
     private void Start()
@@ -29,24 +31,29 @@ public class EndGame : MonoBehaviour {
     public void listEmail(List<Email> list) 
     {
         Email = list;
-        _mailIndex = Email.Count;
+        _mailIndex = 0;
+        //_mailIndex = Email.Count;
     }
 
     public void ActiveButton() {
         mainMenu.interactable = true;
-        next.interactable = true;
+        
     }
     public void DisabledButton() {
-        mainMenu.interactable = false;
+        mainMenu.interactable = true;
         next.interactable = false;
+        L.interactable = false;
+        R.interactable = true;
     }
     public void Defeat() {
+        _mailIndex=0;
         nextDayTextButon.text = "Recomencer le niveau";
         UpdateMailReviewLabel();
         DisabledButton();
     }
 
     public void Victory() {
+        _mailIndex = 0;
         nextDayTextButon.text = "niveau suivant";
         UpdateMailReviewLabel();
         DisabledButton();
@@ -56,17 +63,37 @@ public class EndGame : MonoBehaviour {
     {
         _mailIndex++;
         UpdateMailReviewLabel();
-        ActiveButton();
+        //ActiveButton();
+        if(_mailIndex== Email.Count-1)
+        {
+            next.interactable = true;
+            L.interactable = true;
+            R.interactable = false;
+        }
+        else
+        {
+            L.interactable = true;
+        }
     }
 
     public void buttonBack()
     {
         _mailIndex--;
         UpdateMailReviewLabel();
+        if (_mailIndex == 0)
+        {
+            L.interactable = false;
+            R.interactable = true;
+        }
+        else
+        {
+            R.interactable = true;
+        }
     }
 
     private void UpdateMailReviewLabel()
     {
-        //mailInfoLabel.text = $"Revue de mail ({_mailIndex}/4)";
+        mailInfoLabel.text = "Revue de mail "+_mailIndex+"/"+Email.Count;
+        email.UpdateMailInfos(Email[_mailIndex]);
     }
 }

@@ -70,17 +70,19 @@ namespace Managers
             //Instantiate(victoryScreen);
             endGame.gameObject.SetActive(true);
             game.SetActive(false);
+            endGame.listEmail(_sessionEmails);
             endGame.Victory();
             end = true;
-			endGame.listEmail(_sessionEmails);
+			
         }
 
 		public void Defeat() {
             currentDay -= 1;
             endGame.gameObject.SetActive(true);
             game.SetActive(false);
-			endGame.Defeat();
             endGame.listEmail(_sessionEmails);
+            endGame.Defeat();
+            
             end = true;
         }
 
