@@ -1,4 +1,7 @@
-﻿using Data;
+﻿// Namespace imports
+using Data;
+
+// Unity imports
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
