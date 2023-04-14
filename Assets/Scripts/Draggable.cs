@@ -12,7 +12,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler
 		canvas = GetComponentInParent<Canvas>();
 	}
 
-	public void OnBeginDrag(PointerEventData eventData) {
+	public virtual void OnBeginDrag(PointerEventData eventData) {
 		originalPosition = rectTransform.anchoredPosition;
 	}
 
