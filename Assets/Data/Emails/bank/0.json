@@ -1,7 +1,10 @@
 ﻿{
 	"addresses": {
 		"valid": [
-			"aa"
+			"gustave.chef@.fr","flavien.flapart@.fr", "yoann.loir@fr" , " sécurité.guet@.fr", "creditditcreer@.fr", "kiami@.fr" ,
+			 "parfumerie.scorpio.fr" ," bertrand@tavernier"
+			,
+			"eau@france.fr" , "micheletjacquy@merci.fr" , "cheval@charale.fr" 
 		],
 		"invalid": [
 			"ab"
@@ -9,7 +12,9 @@
 	},
 	"headers": {
 		"valid": [
-			"ba"
+			"Dîner ostentatoire","Demande de la maison Flapart" , "Invitation au séminaire ","Alerte Sécurité ","Vos documents","Facture Eau"
+			,"Emballer vos retours","Votre commande est prête","Merci votre Majesté","Votre abonnement d’equitation est sur le point d’expirer",
+			"La taverne change de proprietaire et de conditions"
 		],
 		"invalid": [
 			"bb"
@@ -17,7 +22,72 @@
 	},
 	"bodies": {
 		"valid": [
-			"ca"
+			"L’altesse Minaj a été demandée à la cour de Saint Veillon le 16 avril 743. Afin de connaître ses 
+			préférences gustatives, nous aimerions prévoir un rendez-vous. Le roi et moi-même, son 
+			conseiller, souhaitons organiser un dîner ostentatoire le 7 avril. Pourriez-vous confirmer cette 
+			date auprès de sa tutelle ?",
+			
+			"Membres du conseil, je m’adresse aujourd’hui à vous pour vous solliciter une requête. Ma 
+			femme et moi-même souhaitons ouvrir un commerce près de la place Tutorat. 
+			Malheureusement avec la récente peste, et l’arrivée prochaine de notre enfant, nous sommes 
+			dépourvus de deniers. La banque refuse d’accepter de nous venir en aide. Vous êtes notre seul 
+			espoir. ",
+
+			"Membres du conseil, je m’adresse aujourd’hui à vous pour vous solliciter une requête. Ma 
+			femme et moi-même souhaitons ouvrir un commerce près de la place Tutorat. 
+			Malheureusement avec la récente peste, et l’arrivée prochaine de notre enfant, nous sommes 
+			dépourvus de deniers. La banque refuse d’accepter de nous venir en aide. Vous êtes notre seul 
+			espoir. ",
+
+			"Nous avons détecté une intrusion sur la partie ouest de Mailbourg cette nuit du 11 mars. Si
+			c'était vous, aucune action de votre part n'est requise. Dans le cas contraire, nous vous aiderons 
+			à sécuriser ce genre d’évènements. Nous vous demandons d’alerter les gardes et de changer 
+			le mot de passe qui permet l’accès à cette cour. Veillez à ne pas communiquer votre mot de 
+			passe.",
+
+			"Cher Majesté ou quiconque d’assez proche pour lire cette lettre,
+			Vos parchemins sont à votre disposition dans votre espace personnel de consultation à la 
+			banque. 
+			- Demande d'adhésion contrat PACIFISTA
+			- Parchemins contractuels
+			- Modalités de signature 
+			- Relevé de comptes
+			Nous pouvons aussi, aux ordres de sa Majesté, vous faire parvenir ces documents en main 
+			propre.",
+
+			"Cher Majesté,
+			Vous allez recevoir (ou venez de recevoir) votre facture Eau publique de la grande Gaule.
+			Nous attirons votre attention sur le fait que celle-ci ne sera pas prélevée. Pour plus de 
+			simplicité, nous vous invitons à opter pour le paiement par prélèvement mensuel.",
+
+			"Bonjour costumière de Mailbourg, 
+			Nous avons bien reçu votre demande de retour concernant la robe de sa Majesté Minaj 
+			jugée trop petite. Vous pouvez désormais commencer à préparer votre malle poste. 
+			Dès que nous l'aurons reçu, nous vous rembourserons sous 14 jours. Dans tous les cas, 
+			nous vous tiendrons au courant dès réception de votre retour.",
+
+			"Bonjour ma Majesté Minaj, 
+			Avec nos récentes recherches, nous avons enfin trouvé un parfum qui pourrait vous convenir.
+			Nous avons réalisé de multiples essais avec différentes plantes comme des mandragores, 
+			banchiflores et des saules cogneurs. Notre parfum a des touches boisés, irisées et un soupçon
+			de féminité. Nous vous l’avons déjà envoyé et nous serions comblés d’avoir vos retours.",
+
+			"Nous tenions à vous remercier pour votre participation à notre fête privative. C’était un réel 
+			plaisir de vous recevoir dans de telles conditions. Vous avez été imperturbable malgré les flots 
+			et vous avez fait preuve d’une dextérité à toute épreuve.",
+
+			"Votre abonnement d’équitation expirera le lundi 14 avril 743. Après cette date, vous perdrez 
+			l’accès à plus d’une dizaine de chevaux de haute qualité, y compris de nouveaux arrivant
+			prochainement. Nous vous conseillons de nous contacter par coursier afin de reprendre votre 
+			abonnement si vous le souhaitez.",
+
+			"Cher Mailbourgiens, 
+			Nous souhaitons vous faire savoir que nous mettons à jour nos conditions de vente et notre
+			charte de sécurité. La transparence nous tient à cœur, et nous tenons à vous informer à l'avance 
+			de ce qui va changer, afin que vous puissiez découvrir toutes les nouveautés. Ces changements 
+			seront effectifs à compter du 27 mars 744. Aussi, moi, Bertrand Tavernier reprend la taverne
+			de mon défunt père, mort dans un accident de charrette"
+
 		],
 		"invalid": [
 			"cb"
@@ -25,7 +95,31 @@
 	},
 	"footers": {
 		"valid": [
-			"da"
+			"Dieu vous garde,
+			Gustave de notre Saint Veillon.",
+			"En vous remerciant d’avance, pour votre bonté et votre âme,
+			Flavien Flapart",
+			"En espérant vous retrouver à cette occasion,
+			Avec notre plus grand respect,
+			Yoann Loir",
+			"Prenez garde, 
+			Votre chère diligence",
+			"À très bientôt,
+			Crédit Dit « Cré »",
+			"Bien à vous,
+			La grande Gaule",
+			"Respectueusement, 
+			Le commerce, Kiami",
+			"Merci pour vos retours et votre bonté.
+			La parfumerie Scorpio",
+			"Encore merci,
+			Michel et Jacquy",
+			"Qu’Odin vous garde,
+			L’équipe equestre Charale.",
+			"Amicalement,
+			Tavernier Bertrand"
+			
+
 		],
 		"invalid": [
 			"db"
