@@ -14,8 +14,6 @@ public class Tampon: Draggable, IEndDragHandler
 		top.gameObject.SetActive(true);
 		front.gameObject.SetActive(false);
 
-
-
         Vector2 localMousePosition;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(top.rectTransform.parent as RectTransform, eventData.position, null, out localMousePosition);
 
@@ -25,7 +23,6 @@ public class Tampon: Draggable, IEndDragHandler
     }
 
 	public void OnEndDrag(PointerEventData eventData) {
-        Debug.Log("x : " + eventData.position.x + " y : " + eventData.position.y);
         top.gameObject.SetActive(false);
 		front.gameObject.SetActive(true);
 		
