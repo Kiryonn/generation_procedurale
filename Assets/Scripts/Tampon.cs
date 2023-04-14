@@ -63,14 +63,15 @@ public class Tampon : MonoBehaviour
             eventData.pressEventCamera, 
             out Vector2 localPoint);
 
-        /*if (rectTransformToCheck.rect.Contains(localPoint))
+        if (rectTransformToCheck.rect.Contains(localPoint))
         {
-            //Debug.Log("mail validée");
-        }*/
+            //appel de la fonction de l'aparition de la cire
+            GameManager.Instance.mailValider(true);
+        }
 
-        //appel de la fonction de l'aparition de la cire
+        
 
-        GameManager.Instance.mailValider(true);
+        
         transform.position = basePosition;
 
        
