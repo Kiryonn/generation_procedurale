@@ -7,7 +7,7 @@
 			"eau@france.fr" , "micheletjacquy@merci.fr" , "cheval@charale.fr" 
 		],
 		"invalid": [
-			"ab"
+			"jeVaisTePiraté@jesuisDebile.com"
 		]
 	},
 	"headers": {
@@ -17,7 +17,7 @@
 			"La taverne change de proprietaire et de conditions"
 		],
 		"invalid": [
-			"bb"
+			"une offre excptionelle "
 		]
 	},
 	"bodies": {
@@ -26,7 +26,7 @@
 			
 			"Membres du conseil, je m’adresse aujourd’hui à vous pour vous solliciter une requête. Ma femme et moi-même souhaitons ouvrir un commerce près de la place Tutorat. Malheureusement avec la récente peste, et l’arrivée prochaine de notre enfant, nous sommes dépourvus de deniers. La banque refuse d’accepter de nous venir en aide. Vous êtes notre seul espoir. ",
 
-			"Membres du conseil, je m’adresse aujourd’hui à vous pour vous solliciter une requête. Ma femme et moi-même souhaitons ouvrir un commerce près de la place Tutorat. Malheureusement avec la récente peste, et l’arrivée prochaine de notre enfant, nous sommes dépourvus de deniers. La banque refuse d’accepter de nous venir en aide. Vous êtes notre seul espoir. ",
+			"Le séminaire 'Que peut la poésie à l'âge du Capital ?' (Structure International de Philosophie) aura lieu le jeudi 1er avril à la place Saint-Cécile à la tombée de la nuit. Nous aurons le plaisir d'accueillir Stéphane Danski, auteur de Debord ou La diffraction du temps.",
 
 			"Nous avons détecté une intrusion sur la partie ouest de Mailbourg cette nuit du 11 mars. Si c'était vous, aucune action de votre part n'est requise. Dans le cas contraire, nous vous aiderons à sécuriser ce genre d’évènements. Nous vous demandons d’alerter les gardes et de changer le mot de passe qui permet l’accès à cette cour. Veillez à ne pas communiquer votre mot de passe.",
 
@@ -46,7 +46,7 @@
 
 		],
 		"invalid": [
-			"cb"
+			"donne moi tout ton argent ou je te tue "
 		]
 	},
 	"footers": {
@@ -66,7 +66,7 @@
 
 		],
 		"invalid": [
-			"db"
+			"avec toute amité , le garde de la 3 eme ronde "
 		]
 	}
 }
