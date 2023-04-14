@@ -105,3 +105,10 @@ namespace Managers
 		}
 	}
 }
+
+public enum Rules {
+	InvalidAddress = 1,
+	IncorrectSpelling = 2,
+	PersonalData = 4,
+	FishyLink = 8
+}
