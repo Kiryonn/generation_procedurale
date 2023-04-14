@@ -5,16 +5,13 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Managers
-{
-    internal class EmailManager : MonoBehaviour
-    {
+namespace Managers {
+    internal class EmailManager : MonoBehaviour {
         public static EmailManager Instance;
         public float phishingChance;
         private string[] _possibleContext;
 
-        private void Awake()
-        {
+        private void Awake() {
             // get the list of possible context
             DirectoryInfo emailDir = new DirectoryInfo(Application.dataPath + "/Data/Emails/");
             DirectoryInfo[] contexts = emailDir.GetDirectories();
@@ -33,8 +30,7 @@ namespace Managers
         /// </summary>
         /// <param name="rules">the active rules of the level</param>
         /// <returns>The generated e-mail</returns>
-        public Email CreateEMail(int rules)
-        {
+        public Email CreateEMail(int rules) {
             // choose a context
             var context = _possibleContext[Random.Range(0, _possibleContext.Length)];
 
@@ -46,8 +42,7 @@ namespace Managers
             DirectoryInfo contextDir = new DirectoryInfo(contextPath);
             FileInfo[] emailRules = contextDir.GetFiles();
 
-            foreach (FileInfo emailRule in emailRules)
-            {
+            foreach (FileInfo emailRule in emailRules) {
                 var extension = emailRule.Extension;
                 var filename = emailRule.Name;
                 // ignore unsupported files
@@ -59,8 +54,7 @@ namespace Managers
                 var rulesCopy = rules;
                 var fileRulesCopy = fileRules;
 
-                while (areRulesValid || rulesCopy == fileRulesCopy)
-                {
+                while (areRulesValid || rulesCopy == fileRulesCopy) {
                     if (rulesCopy == 0 || fileRulesCopy == 0) { areRulesValid = rulesCopy >= fileRulesCopy; break; }
                     if ((rulesCopy & 1) < (fileRulesCopy & 1)) { areRulesValid = false; continue; }
                     rulesCopy >>= 1;
