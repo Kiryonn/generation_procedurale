@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Data;
 using UI;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,18 +27,16 @@ namespace Managers
 		private int currentMail;
 		[Header("nombre de mail")]
 		public int nbMailDay;
-		private bool end;
+		private bool _isGameOver;
 
 		private int _rules;
 
-		private void Awake()
-		{
+		private void Awake() {
 			if (Instance == null)
 				Instance = this;
 		}
 
-		private void Start()
-		{
+		private void Start() {
 			_emailOriginalPosition = email.transform.position;
 			var daysPath = Application.dataPath + "/Data/difficulties.json";
 			var json = File.ReadAllText(daysPath);
@@ -48,31 +44,23 @@ namespace Managers
 			currentDay = PlayerPrefs.GetInt("Session");
 			_rules = days[currentDay];
 			_sessionEmails = new List<Email>();
-            end=false;
+            _isGameOver=false;
             currentMail = -1;
             CreateNewEmail();
-
 		}
 
-
-		/// <summary>
-		/// Check if the player is right or wrong and update the reputation accordingly.
-		/// </summary>
-		/// <param name="playerAnswer">Did the player listed the e-mail as phishing or not.</param>
 		public void CheckResult(bool playerAnswer) {
 			var isPlayerCorrect = playerAnswer == _sessionEmails[currentMail].IsPhishing;
 			reputation.AddReputation(isPlayerCorrect ? reputationLoss : reputationGain);
 		}
 
-
-
 		public void Victory() {
             //Instantiate(victoryScreen);
             endGame.gameObject.SetActive(true);
             game.SetActive(false);
-            endGame.listEmail(_sessionEmails);
+            endGame.ListEmail(_sessionEmails);
             endGame.Victory();
-            end = true;
+            _isGameOver = true;
 			
         }
 
@@ -80,26 +68,27 @@ namespace Managers
             currentDay -= 1;
             endGame.gameObject.SetActive(true);
             game.SetActive(false);
-            endGame.listEmail(_sessionEmails);
+            endGame.ListEmail(_sessionEmails);
             endGame.Defeat();
             
-            end = true;
+            _isGameOver = true;
         }
 
-		public void mailValider(bool playerAnswer) {
-			Debug.Log("mail valider");
+		public void MailValider(bool playerAnswer) {
+			// todo remove debug
+			Debug.Log("mail validé");
 			CheckResult(playerAnswer);
-			if (end) { return; }
+			if (_isGameOver) { return; }
             if (_sessionEmails.Count == nbMailDay) { Victory(); }
-			else{CreateNewEmail();}
+			else { CreateNewEmail(); }
         }
 
 		public void GoToMainMenu() {
 			SceneManager.LoadScene("MainMenu");
         }
 
-		public void nextDay() {
-            end = false;
+		public void NextDay() {
+            _isGameOver = false;
 			_sessionEmails = new List<Email>();
             currentDay += 1;
             endGame.gameObject.SetActive(false);

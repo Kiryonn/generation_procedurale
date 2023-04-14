@@ -34,7 +34,7 @@ public class Tampon: Draggable, IEndDragHandler
 			out Vector2 localPoint);
 
 		if (rectTransformToCheck.rect.Contains(localPoint))
-			GameManager.Instance.mailValider(true);
+			GameManager.Instance.MailValider(true);
 
         rectTransform.anchoredPosition = originalPosition;
     }
