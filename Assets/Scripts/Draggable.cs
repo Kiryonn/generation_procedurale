@@ -1,22 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler
-{
+public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler {
+	[SerializeField] protected Canvas canvas;
 	protected RectTransform rectTransform;
-	protected Canvas canvas;
 	protected Vector2 originalPosition;
 
-	private void Start() {
-		rectTransform = GetComponent<RectTransform>();
-		canvas = GetComponentInParent<Canvas>();
-	}
+	private void Start() { rectTransform = GetComponent<RectTransform>(); }
 
-	public virtual void OnBeginDrag(PointerEventData eventData) {
-		originalPosition = rectTransform.anchoredPosition;
-	}
+	public virtual void OnBeginDrag(PointerEventData eventData) { originalPosition = rectTransform.anchoredPosition; }
 
-	public void OnDrag(PointerEventData eventData) {
-		rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-	}
+	public void OnDrag(PointerEventData eventData) { rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor; }
 }
