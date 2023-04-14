@@ -17,18 +17,17 @@ namespace Managers
 		public float reputationGain;
 		[Header("Screens")]
 		public EndGame endGame;
-		[SerializeField]
-		private GameObject game;
+		[SerializeField] private GameObject game;
+		private int currentDay;
+		private int currentMail;
 		[Header("E-mail")]
 		public EmailUI email;
 		private Vector2 _emailOriginalPosition;
 		private List<Email> _sessionEmails;
-		private int currentDay;
-		private int currentMail;
-		[Header("nombre de mail")]
+		[Header("Nombre de mail")]
 		public int nbMailDay;
+		
 		private bool _isGameOver;
-
 		private int _rules;
 
 		private void Awake() {
@@ -44,7 +43,6 @@ namespace Managers
 			currentDay = PlayerPrefs.GetInt("Session");
 			_rules = days[currentDay];
 			_sessionEmails = new List<Email>();
-            _isGameOver=false;
             currentMail = -1;
             CreateNewEmail();
 		}
@@ -74,8 +72,6 @@ namespace Managers
         }
 
 		public void MailValider(bool playerAnswer) {
-			// todo remove debug
-			Debug.Log("mail validé");
 			CheckResult(playerAnswer);
 			if (_isGameOver) { return; }
             if (_sessionEmails.Count == nbMailDay) { Victory(); }
