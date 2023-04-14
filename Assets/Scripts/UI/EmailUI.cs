@@ -71,14 +71,14 @@ namespace UI
 			// check if the drop position is within a valid area
 			foreach (RectTransform droppableArea in closeAreas) {
 				if (!Overlaps(droppableArea, eventData)) continue;
-				if (!_isMailReadable) return;
+				if (!_isMailReadable) return;  // mail already closed
 				Close();
 				_warp.position = droppableArea.position;
 				return;
 			}
 			foreach (RectTransform droppableArea in openAreas) {
 				if (!Overlaps(droppableArea, eventData)) continue;
-				if (_isMailReadable) return;
+				if (_isMailReadable) return;  // mail already opened
 				Open();
 				return;
 			}
