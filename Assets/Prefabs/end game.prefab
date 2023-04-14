@@ -860,7 +860,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3879890139324754352}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8848502855801161644, guid: cb7e28566ef00c14bb5eb398b590925c, type: 3}
+        m_TargetAssemblyTypeName: Managers.SceneLoaderManager, Assembly-CSharp
+        m_MethodName: LoadMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4646876647830058177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,6 +1610,14 @@ PrefabInstance:
     - target: {fileID: 7196374020738790489, guid: 762e8b8a8bedf3d48a14c4576b68fe50, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -476.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523983096338896485, guid: 762e8b8a8bedf3d48a14c4576b68fe50, type: 3}
+      propertyPath: m_Size
+      value: 0.8208255
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523983096338896485, guid: 762e8b8a8bedf3d48a14c4576b68fe50, type: 3}
+      propertyPath: m_Value
+      value: 0.00000019972238
       objectReference: {fileID: 0}
     - target: {fileID: 7539489017992318830, guid: 762e8b8a8bedf3d48a14c4576b68fe50, type: 3}
       propertyPath: canvas
