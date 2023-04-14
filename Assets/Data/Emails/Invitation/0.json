@@ -1,0 +1,39 @@
+﻿{
+	"addresses": {
+		"valid": [
+			 "yoann.loir@.fr" ,"Yoann.Loir@.fr","Yoann.loir@.fr"
+		],
+		"invalid": [
+			"jeVaisTePiraté@.com","Yoann.Loir@.tu"
+		]
+	},
+	"headers": {
+		"valid": [
+"Invitation au séminaire ","Invitation au séminaire sur la poésie ","Invitation a une decouverte de la poésie "
+		],
+		"invalid": [
+			"une offre excptionelle "
+		]
+	},
+	"bodies": {
+		"valid": [
+
+			"Le séminaire 'Que peut la poésie à l'âge du Capital ?' (Structure International de Philosophie) aura lieu le jeudi 1er avril à la place Saint-Cécile à la tombée de la nuit. Nous aurons le plaisir d'accueillir Stéphane Danski, auteur de Debord ou La diffraction du temps."
+
+		],
+		"invalid": [
+			"donne moi tout ton argent ou je te tue "
+		]
+	},
+	"footers": {
+		"valid": [
+			
+			"En espérant vous retrouver à cette occasion, \n Avec notre plus grand respect, \n Yoann Loir"
+
+
+		],
+		"invalid": [
+			"avec toute amité , le garde de la 3 eme ronde "
+		]
+	}
+}

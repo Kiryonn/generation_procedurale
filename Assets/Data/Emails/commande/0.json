@@ -1,0 +1,36 @@
+﻿{
+	"addresses": {
+		"valid": [
+			 "parfumerie.scorpio.fr" 
+		],
+		"invalid": [
+			"jeVaisTePiraté@jesuisDebile.com"
+		]
+	},
+	"headers": {
+		"valid": [
+			"Votre commande est prête","votre colis est prêt"
+		],
+		"invalid": [
+			"une offre excptionelle "
+		]
+	},
+	"bodies": {
+		"valid": [
+			
+			"Bonjour ma Majesté Minaj, \n Avec nos récentes recherches, nous avons enfin trouvé un parfum qui pourrait vous convenir. Nous avons réalisé de multiples essais avec différentes plantes comme des mandragores, banchiflores et des saules cogneurs. Notre parfum a des touches boisés, irisées et un soupçon de féminité. Nous vous l’avons déjà envoyé et nous serions comblés d’avoir vos retours."
+		],
+		"invalid": [
+			"donne moi tout ton argent ou je te tue "
+		]
+	},
+	"footers": {
+		"valid": [
+			
+			"Merci pour vos retours et votre bonté.\n La parfumerie Scorpio"
+		],
+		"invalid": [
+			"avec toute amité , le garde de la 3 eme ronde "
+		]
+	}
+}
