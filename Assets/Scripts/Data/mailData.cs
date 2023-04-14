@@ -17,9 +17,9 @@ public class mailData : ScriptableObject
 [System.Serializable]
 public class mail 
 {
-    public Email email;
-    public string addresses
-    public string Titre;
-    public string text;
+    public string addresses;
+    public string headers;
+    public string bodies;
+    public string footers;
 
 }
