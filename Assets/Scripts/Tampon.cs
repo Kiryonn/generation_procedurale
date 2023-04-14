@@ -28,6 +28,6 @@ public class Tampon: Draggable, IEndDragHandler
 		if (rectTransformToCheck.rect.Contains(localPoint))
 			GameManager.Instance.mailValider(true);
 
-		transform.position = originalPosition;
+		rectTransform.anchoredPosition = originalPosition;
 	}
 }
