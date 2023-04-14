@@ -68,24 +68,25 @@ namespace UI
 		}
 
 		public void OnEndDrag(PointerEventData eventData) {
-			// check if there is a restriction
+			// check if the drop position is within a valid area
 			foreach (RectTransform droppableArea in closeAreas) {
-				if (!CheckPosition(droppableArea, eventData)) continue;
+				if (!Overlaps(droppableArea, eventData)) continue;
 				if (!_isMailReadable) return;
 				Close();
 				_warp.position = droppableArea.position;
 				return;
 			}
 			foreach (RectTransform droppableArea in openAreas) {
-				if (!CheckPosition(droppableArea, eventData)) continue;
+				if (!Overlaps(droppableArea, eventData)) continue;
 				if (_isMailReadable) return;
 				Open();
 				return;
 			}
+			// if the dropped position is not valid
 			rectTransform.anchoredPosition = originalPosition;
 		}
 
-		private bool CheckPosition(RectTransform area, PointerEventData eventData) {
+		private bool Overlaps(RectTransform area, PointerEventData eventData) {
 			return RectTransformUtility.RectangleContainsScreenPoint(area, eventData.position, canvas.worldCamera);
 		}
 	}
