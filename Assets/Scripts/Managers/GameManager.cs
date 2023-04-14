@@ -61,8 +61,7 @@ namespace Managers
             endGame.ListEmail(_sessionEmails);
             endGame.Victory();
             _isGameOver = true;
-			
-        }
+		}
 
 		public void Defeat() {
             currentDay -= 1;

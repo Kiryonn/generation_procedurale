@@ -1,9 +1,14 @@
-using TMPro;
+// Namespace imports
 using Data;
 using UI;
-using System.Collections.Generic;
+
+// Unity imports
+using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
+
+// Other imports
+using System.Collections.Generic;
 
 
 public class EndGame: MonoBehaviour {
