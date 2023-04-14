@@ -29,10 +29,6 @@ namespace UI
 			_warp = transform.Find("Close").GetComponent<RectTransform>();
 		}
 
-		/// <summary>
-		/// updates the content and display of the e-mail
-		/// </summary>
-		/// <param name="email">the e-mail to display</param>
 		public void UpdateMailInfos(Email email) {
 			// update e-mail content
 			addressTMPText.text = email.Address;

@@ -1,99 +1,56 @@
-using System;
-using Data;
-using System.Collections.Generic;
-using Managers;
 using TMPro;
+using Data;
 using UI;
-using UnityEngine;
-using UnityEngine.Serialization;
+using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine;
 
-public class EndGame : MonoBehaviour {
-    public EmailUI email;
-    public GameManager gameManager;
-    public TextMeshProUGUI nextDayTextButon;
-    public TMP_Text mailInfoLabel;
 
-    public Button mainMenu;
-    public Button next;
-    public Button R;
-    public Button L;
-    private int _mailIndex = 0;
-    List<Email> Email;
+public class EndGame: MonoBehaviour {
+	[SerializeField] private EmailUI email;
+	[SerializeField] private TMP_Text nextDayTextButton;
+	[SerializeField] private TMP_Text mailInfoLabel;
 
-    private void Start()
-    {
-        Canvas.ForceUpdateCanvases();
-        gameObject.SetActive(false);
-        gameObject.SetActive(true);
-    }
+	[SerializeField] private Button mainMenuButton;
+	[SerializeField] private Button nextLevelButton;
+	[SerializeField] private Button nextButton;
+	[SerializeField] private Button previousButton;
+	private int _mailIndex = 0;
+	private List<Email> _emails;
 
-    public void listEmail(List<Email> list) 
-    {
-        Email = list;
-        _mailIndex = 0;
-        //_mailIndex = Email.Count;
-    }
+	public void ListEmail(List<Email> list) {
+		_emails = list;
+		_mailIndex = 0;
+	}
 
-    public void ActiveButton() {
-        mainMenu.interactable = true;
-        
-    }
-    public void DisabledButton() {
-        mainMenu.interactable = true;
-        next.interactable = false;
-        L.interactable = false;
-        R.interactable = true;
-    }
-    public void Defeat() {
-        _mailIndex=0;
-        nextDayTextButon.text = "Recomencer le niveau";
-        UpdateMailReviewLabel();
-        DisabledButton();
-    }
+	public void Defeat() {
+		_mailIndex = 0;
+		nextDayTextButton.text = "Recomencer le niveau";
+		UpdateMailReviewLabel();
+	}
 
-    public void Victory() {
-        _mailIndex = 0;
-        nextDayTextButon.text = "niveau suivant";
-        UpdateMailReviewLabel();
-        DisabledButton();
-    }
+	public void Victory() {
+		_mailIndex = 0;
+		nextDayTextButton.text = "Niveau suivant";
+		UpdateMailReviewLabel();
+	}
 
-    public void buttonNext()
-    {
-        _mailIndex++;
-        UpdateMailReviewLabel();
-        //ActiveButton();
-        if(_mailIndex== Email.Count-1)
-        {
-            next.interactable = true;
-            L.interactable = true;
-            R.interactable = false;
-        }
-        else
-        {
-            L.interactable = true;
-        }
-    }
+	public void OnNextButtonPressed() {
+		_mailIndex++;
+		UpdateMailReviewLabel();
+		nextButton.interactable = _mailIndex != _emails.Count - 1;
+		previousButton.interactable = true;
+	}
 
-    public void buttonBack()
-    {
-        _mailIndex--;
-        UpdateMailReviewLabel();
-        if (_mailIndex == 0)
-        {
-            L.interactable = false;
-            R.interactable = true;
-        }
-        else
-        {
-            R.interactable = true;
-        }
-    }
+	public void OnPreviousButtonPressed() {
+		_mailIndex--;
+		UpdateMailReviewLabel();
+		previousButton.interactable = _mailIndex != 0;
+		nextButton.interactable = true;
+	}
 
-    private void UpdateMailReviewLabel()
-    {
-        mailInfoLabel.text = "Revue de mail "+_mailIndex+"/"+Email.Count;
-        email.UpdateMailInfos(Email[_mailIndex]);
-    }
+	private void UpdateMailReviewLabel() {
+		mailInfoLabel.text = $"Revue de mail {_mailIndex + 1} / {_emails.Count}";
+		email.UpdateMailInfos(_emails[_mailIndex]);
+	}
 }
