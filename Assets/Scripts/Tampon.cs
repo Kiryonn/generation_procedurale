@@ -30,4 +30,5 @@ public class Tampon: Draggable, IEndDragHandler
 
         rectTransform.anchoredPosition = originalPosition;
     }
+
 }
