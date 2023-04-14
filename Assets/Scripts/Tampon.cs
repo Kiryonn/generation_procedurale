@@ -13,12 +13,20 @@ public class Tampon: Draggable, IEndDragHandler
 		base.OnBeginDrag(eventData);
 		top.gameObject.SetActive(true);
 		front.gameObject.SetActive(false);
-	}
+
+        Vector2 localMousePosition;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(top.rectTransform.parent as RectTransform, eventData.position, null, out localMousePosition);
+
+        // Centrer l'objet "top" sur la position de la souris
+        top.rectTransform.localPosition = localMousePosition;
+
+    }
 
 	public void OnEndDrag(PointerEventData eventData) {
-		top.gameObject.SetActive(false);
+        top.gameObject.SetActive(false);
 		front.gameObject.SetActive(true);
-
+		
+			
 		RectTransformUtility.ScreenPointToLocalPointInRectangle(
 			rectTransformToCheck,
 			eventData.position,
