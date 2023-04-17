@@ -1,7 +1,7 @@
 ﻿{
 	"addresses": {
-		"valid": ["gustave.chef@.fr"],
-		"invalid": ["CuisineDeLamort@.com"]
+		"valid": ["gustave.chef@.fr","cuisine.Saint.Veillon@.fr"],
+		"invalid": ["CuisineDeLamort@.com","cuissine.sainte.Veilon@.fr"]
 	},
 	"headers": {
 		"valid": [
@@ -13,7 +13,7 @@
 	},
 	"bodies": {
 		"valid": [
-			"L’altesse Minaj a été demandée à la cour de Saint Veillon le 16 avril 743. Afin de connaître ses préférences gustatives, nous aimerions prévoir un rendez-vous. Le roi et moi-même, son conseiller, souhaitons organiser un dîner ostentatoire le 7 avril. Pourriez-vous confirmer cette date auprès de sa tutelle ?",
+			"L’altesse Minaj a été demandée à la cour de Saint Veillon le 16 avril 743. Afin de connaître ses préférences gustatives, nous aimerions prévoir un rendez-vous. Le roi et moi-même, son conseiller, souhaitons organiser un dîner ostentatoire le 7 avril. Pourriez-vous confirmer cette date auprès de sa tutelle ?"
 		],
 		"invalid": [
 			"donne moi tout ton argent ou je te tue "
@@ -21,7 +21,7 @@
 	},
 	"footers": {
 		"valid": [
-			"Dieu vous garde,\nGustave de notre Saint Veillon.",
+			"Dieu vous garde,\nGustave de notre Saint Veillon."
 
 		],
 		"invalid": [
