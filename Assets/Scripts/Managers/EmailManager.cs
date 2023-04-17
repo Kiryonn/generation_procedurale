@@ -47,6 +47,7 @@ namespace Managers {
 				var filename = emailRule.Name;
 				// ignore unsupported files
 				if (extension != ".json") continue;
+				Debug.Log(context + " - " + filename);
 
 				// check rules compatibility
 				var fileRules = int.Parse(filename.Substring(0, filename.Length - extension.Length));
@@ -77,7 +78,7 @@ namespace Managers {
 			var difficulty = difficulties[Random.Range(0, difficulties.Length)];
 			var isAddressWrong = Random.Range(0f, 1f) <= phishingChance;
 			var isHeaderWrong = Random.Range(0f, 1f) <= phishingChance;
-			var isBodyWrong = Random.Range(0f, 1f) <= phishingChance;
+			var isBodyWrong = Random.Range(0f, 1f) <= phishingChance || isAddressWrong || isHeaderWrong;
 			var isFooterWrong = Random.Range(0f, 1f) <= phishingChance;
 
 			EmailBlock pool = possibleMails[difficulty];

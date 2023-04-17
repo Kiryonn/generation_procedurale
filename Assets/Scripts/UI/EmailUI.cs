@@ -36,17 +36,26 @@ namespace UI
 			bodyTMPText.text = email.Body;
 			footerTMPText.text = email.Footer;
 
-			// force the update of the textArea
-			// EXTREMELY IMPORTANT DO NOT TOUCH
-			LayoutRebuilder.ForceRebuildLayoutImmediate(textArea.GetComponent<RectTransform>());
 			scrollbar.size += 0.1f;
 			scrollbar.size -= 0.1f;
+			ContentSizeFitter csf = textArea.GetComponent<ContentSizeFitter>();
+			var tat = textArea.GetComponent<RectTransform>();
+			Canvas.ForceUpdateCanvases();
+			LayoutRebuilder.ForceRebuildLayoutImmediate(tat);
+			csf.verticalFit = ContentSizeFitter.FitMode.Unconstrained;
+			Canvas.ForceUpdateCanvases();
+			LayoutRebuilder.ForceRebuildLayoutImmediate(tat);
+			csf.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+			Canvas.ForceUpdateCanvases();
+			LayoutRebuilder.ForceRebuildLayoutImmediate(tat);
+			
 
 			// scroll to the top of the letter
 			scrollbar.value = 0;
+			
 		}
 
-		private void Open() {
+		public void Open() {
 			_isMailReadable = true;
 			openedLetter.gameObject.SetActive(true);
 			closedLetter.gameObject.SetActive(false);
@@ -56,6 +65,11 @@ namespace UI
 			_isMailReadable = false;
 			openedLetter.gameObject.SetActive(false);
 			closedLetter.gameObject.SetActive(true);
+		}
+
+		public void Toggle() {
+			if (_isMailReadable) Open();
+			else Close();
 		}
 
 		public void OnEndDrag(PointerEventData eventData) {

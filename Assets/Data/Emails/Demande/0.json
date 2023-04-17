@@ -1,16 +1,22 @@
 ﻿{
 	"addresses": {
 		"valid": [
-			"flavien.flapart@.fr", "fabien.flapart@.fr","françois.flapart@.fr","flober.flapart@.fr","florian.flapart@.fr"
-
+			"flavien.flapart@.fr",
+			"fabien.flapart@.fr",
+			"françois.flapart@.fr",
+			"flober.flapart@.fr",
+			"florian.flapart@.fr"
 		],
 		"invalid": [
-			"arture.kevin@.fr","florence.flapart@.tu"
+			"arture.kevin@.fr",
+			"florence.flapart@.tu"
 		]
 	},
 	"headers": {
 		"valid": [
-			"Demande de la maison Flapart","Demande de la seigneurie Flapart","Demande du Duc Flapart"
+			"Demande de la maison Flapart",
+			"Demande de la seigneurie Flapart",
+			"Demande du Duc Flapart"
 		],
 		"invalid": [
 			"une offre excptionelle du Duc Flapart"
@@ -28,10 +34,9 @@
 		"valid": [
 			"En vous remerciant d’avance, pour votre bonté et votre âme,\n Flavien Flapart",
 			"En vous remerciant d’avance, pour votre bonté et votre âme,\n  la seigneurie Flapart"
-
 		],
 		"invalid": [
-			"avec toute amité , le garde de la 3 eme ronde "
+			"avec toute amité , le garde de la 3 eme ronde"
 		]
 	}
 }

@@ -764,6 +764,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4759044630308989085, guid: 19065142c8dd4fc41b4daaead676c389, type: 3}
+      propertyPath: m_MinHeight
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759044630308989085, guid: 19065142c8dd4fc41b4daaead676c389, type: 3}
+      propertyPath: m_PreferredHeight
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 5359236121111120240, guid: 19065142c8dd4fc41b4daaead676c389, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
