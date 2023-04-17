@@ -1,23 +1,26 @@
 ﻿{
 	"addresses": {
 		"valid": [
-			 "parfumerie.scorpio@.fr", "parfumerie.scorpio.service.client@.fr"
+			"parfumerie.scorpio@.fr",
+			"parfumerie.scorpio.service.client@.fr"
 		],
 		"invalid": [
-			"jeVaisTePiraté@jesuisDebile.com","parfumerie.scorpoi@.fr"
+			"jeVaisTePiraté@jesuisDebile.com",
+			"parfumerie.scorpoi@.fr"
 		]
 	},
 	"headers": {
 		"valid": [
-			"Votre commande est prête","votre colis est prêt"
+			"Votre commande est prête",
+			"votre colis est prêt"
 		],
 		"invalid": [
-			"une offre excptionelle ","votre colis en attente"
+			"une offre excptionelle",
+			"votre colis en attente"
 		]
 	},
 	"bodies": {
 		"valid": [
-			
 			"Bonjour ma Majesté Minaj, \n Avec nos récentes recherches, nous avons enfin trouvé un parfum qui pourrait vous convenir. Nous avons réalisé de multiples essais avec différentes plantes comme des mandragores, banchiflores et des saules cogneurs. Notre parfum a des touches boisés, irisées et un soupçon de féminité. Nous vous l’avons déjà envoyé et nous serions comblés d’avoir vos retours."
 		],
 		"invalid": [

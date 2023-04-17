@@ -1,10 +1,13 @@
 ﻿// Namespace imports
+
+using System;
 using Data;
 
 // Unity imports
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
@@ -28,6 +31,19 @@ namespace UI
 		[SerializeField] private RectTransform[] closeAreas;
 		private bool _isMailReadable;
 
+		[FormerlySerializedAs("cooldown")]
+		[Header("Hints for players")]
+		[SerializeField] private float hintDelay;
+		private bool _hasInteracted;
+		private float _counter;
+
+		private void Update() {
+			_counter += Time.deltaTime;
+
+			if (_counter > hintDelay) {
+				// todo animation de l'aide au drag
+			}
+		}
 
 		public void UpdateMailInfos(Email email) {
 			// update e-mail content
@@ -38,18 +54,9 @@ namespace UI
 
 			scrollbar.size += 0.1f;
 			scrollbar.size -= 0.1f;
-			ContentSizeFitter csf = textArea.GetComponent<ContentSizeFitter>();
-			var tat = textArea.GetComponent<RectTransform>();
-			Canvas.ForceUpdateCanvases();
-			LayoutRebuilder.ForceRebuildLayoutImmediate(tat);
-			csf.verticalFit = ContentSizeFitter.FitMode.Unconstrained;
-			Canvas.ForceUpdateCanvases();
-			LayoutRebuilder.ForceRebuildLayoutImmediate(tat);
-			csf.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-			Canvas.ForceUpdateCanvases();
-			LayoutRebuilder.ForceRebuildLayoutImmediate(tat);
 			
-
+			Invoke(nameof(RefreshContent), 0.1f);
+			
 			// scroll to the top of the letter
 			scrollbar.value = 0;
 			
@@ -93,6 +100,28 @@ namespace UI
 
 		private bool Overlaps(RectTransform area, PointerEventData eventData) {
 			return RectTransformUtility.RectangleContainsScreenPoint(area, eventData.position, canvas.worldCamera);
+		}
+
+		private void RefreshContent() {
+			ContentSizeFitter contentSizeFitter = textArea.GetComponent<ContentSizeFitter>();
+			RectTransform textAreaRectTransform = textArea.GetComponent<RectTransform>();
+
+			Canvas.ForceUpdateCanvases();
+			LayoutRebuilder.ForceRebuildLayoutImmediate(textAreaRectTransform);
+			
+			contentSizeFitter.verticalFit = ContentSizeFitter.FitMode.Unconstrained;
+			Canvas.ForceUpdateCanvases();
+			LayoutRebuilder.ForceRebuildLayoutImmediate(textAreaRectTransform);
+			
+			contentSizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+			Canvas.ForceUpdateCanvases();
+			LayoutRebuilder.ForceRebuildLayoutImmediate(textAreaRectTransform);
+			
+			textArea.enabled = false;
+			Canvas.ForceUpdateCanvases();
+			LayoutRebuilder.ForceRebuildLayoutImmediate(textAreaRectTransform);
+			
+			textArea.enabled = true;
 		}
 	}
 }

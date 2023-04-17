@@ -6,10 +6,8 @@ using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Managers
-{
-	public class GameManager : MonoBehaviour
-	{
+namespace Managers {
+	public class GameManager : MonoBehaviour {
 		public static GameManager Instance;
 		[Header("Reputation")]
 		public Reputation reputation;
@@ -26,7 +24,7 @@ namespace Managers
 		private List<Email> _sessionEmails;
 		[Header("Nombre de mail")]
 		public int nbMailDay;
-		
+
 		private bool _isGameOver;
 		private int _rules;
 

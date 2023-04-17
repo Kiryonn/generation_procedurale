@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 
 public class MailInteraction : MonoBehaviour
 {
@@ -14,7 +13,6 @@ public class MailInteraction : MonoBehaviour
 	private void Start()
 	{
 		_basePosition = transform.position;
-		Debug.Log("area" + rightArea.rect.ToString());
 	}
 
 	/// <summary>
@@ -43,9 +41,7 @@ public class MailInteraction : MonoBehaviour
 			canvas.worldCamera,
 			out Vector2 position);
 
-		Debug.Log("position: " + position.x);
 		var isEmailVisible = rightArea.rect.xMin <= position.x;
-		Debug.Log(isEmailVisible);
 		eMail.SetActive(isEmailVisible);
 		transform.position = _basePosition;
 		gameObject.SetActive(!isEmailVisible);

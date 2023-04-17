@@ -40,14 +40,11 @@ namespace Managers {
 			// search data
 			var contextPath = Application.dataPath + "/Data/Emails/" + context + "/";
 			DirectoryInfo contextDir = new DirectoryInfo(contextPath);
-			var emailRules = contextDir.GetFiles();
+			var emailRules = contextDir.GetFiles("*.json");
 
 			foreach (FileInfo emailRule in emailRules) {
 				var extension = emailRule.Extension;
 				var filename = emailRule.Name;
-				// ignore unsupported files
-				if (extension != ".json") continue;
-				Debug.Log(context + " - " + filename);
 
 				// check rules compatibility
 				var fileRules = int.Parse(filename.Substring(0, filename.Length - extension.Length));
