@@ -26,7 +26,6 @@ public class Tampon: Draggable, IEndDragHandler
         top.gameObject.SetActive(false);
 		front.gameObject.SetActive(true);
 		
-			
 		RectTransformUtility.ScreenPointToLocalPointInRectangle(
 			rectTransformToCheck,
 			eventData.position,

@@ -11,26 +11,23 @@ namespace UI
 {
 	public class EmailUI: Draggable, IEndDragHandler
 	{
-		[Header("Prefab Stuff")] [SerializeField]
-		private Scrollbar scrollbar;
-
+		[Header("Prefab Stuff")]
+		[SerializeField] private Scrollbar scrollbar;
+		[SerializeField] private RectTransform openedLetter;
+		[SerializeField] private RectTransform closedLetter;
 		[SerializeField] private VerticalLayoutGroup textArea;
+		
 		[SerializeField] private TMP_Text addressTMPText;
 		[SerializeField] private TMP_Text headerTMPText;
 		[SerializeField] private TMP_Text bodyTMPText;
 		[SerializeField] private TMP_Text footerTMPText;
+		
 
 		[Space] [Header("Drop stuff")]
 		[SerializeField] private RectTransform[] openAreas;
 		[SerializeField] private RectTransform[] closeAreas;
 		private bool _isMailReadable;
-		private RectTransform _letter;
-		private RectTransform _warp;
 
-		private void Awake() {
-			_letter = transform.Find("Open").GetComponent<RectTransform>();
-			_warp = transform.Find("Close").GetComponent<RectTransform>();
-		}
 
 		public void UpdateMailInfos(Email email) {
 			// update e-mail content
@@ -41,30 +38,24 @@ namespace UI
 
 			// force the update of the textArea
 			// EXTREMELY IMPORTANT DO NOT TOUCH
-			Canvas.ForceUpdateCanvases();
-			textArea.enabled = false;
-			textArea.enabled = true;
+			LayoutRebuilder.ForceRebuildLayoutImmediate(textArea.GetComponent<RectTransform>());
+			scrollbar.size += 0.1f;
+			scrollbar.size -= 0.1f;
 
 			// scroll to the top of the letter
-			scrollbar.value = 1;
+			scrollbar.value = 0;
 		}
 
-		public void Open() {
+		private void Open() {
 			_isMailReadable = true;
-			_letter.gameObject.SetActive(true);
-			_warp.gameObject.SetActive(false);
+			openedLetter.gameObject.SetActive(true);
+			closedLetter.gameObject.SetActive(false);
 		}
 
 		public void Close() {
 			_isMailReadable = false;
-			_letter.gameObject.SetActive(false);
-			_warp.gameObject.SetActive(true);
-		}
-
-		public void Toggle() {
-			_isMailReadable ^= true;
-			if (_isMailReadable) Open();
-			else Close();
+			openedLetter.gameObject.SetActive(false);
+			closedLetter.gameObject.SetActive(true);
 		}
 
 		public void OnEndDrag(PointerEventData eventData) {
@@ -73,7 +64,7 @@ namespace UI
 				if (!Overlaps(droppableArea, eventData)) continue;
 				if (!_isMailReadable) return;  // mail already closed
 				Close();
-				_warp.position = droppableArea.position;
+				closedLetter.position = droppableArea.position;
 				return;
 			}
 			foreach (RectTransform droppableArea in openAreas) {

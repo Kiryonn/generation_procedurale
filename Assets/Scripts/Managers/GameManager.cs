@@ -96,19 +96,18 @@ namespace Managers
         public void CreateNewEmail(){
             currentMail++;
             _sessionEmails.Add(EmailManager.Instance.CreateEMail(_rules));
-
-            email.gameObject.SetActive(false);
 			email.transform.position = _emailOriginalPosition;
 			email.Close();
 			email.UpdateMailInfos(_sessionEmails[currentMail]);
-			email.gameObject.SetActive(true);
 		}
 	}
 }
 
 public enum Rules {
+	Random = -1,
 	InvalidAddress = 1,
 	IncorrectSpelling = 2,
 	PersonalData = 4,
-	FishyLink = 8
+	FishyLink = 8,
+	ExageratedMail = 16
 }

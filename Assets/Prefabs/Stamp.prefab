@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5006840163949618067}
-  - component: {fileID: 689573035211214386}
   - component: {fileID: 6714234452226495614}
+  - component: {fileID: 689573035211214386}
   m_Layer: 0
   m_Name: Stamp
   m_TagString: Untagged
@@ -40,6 +40,14 @@ RectTransform:
   m_AnchoredPosition: {x: -10.704346, y: 27.365036}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6714234452226495614
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003712575269773264}
+  m_CullTransparentMesh: 1
 --- !u!114 &689573035211214386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,17 +60,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca898c54a3fbc8348ad153b2682cfc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   top: {fileID: 3688677192505081785}
   front: {fileID: 8985329550856927501}
   rectTransformToCheck: {fileID: 0}
---- !u!222 &6714234452226495614
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1003712575269773264}
-  m_CullTransparentMesh: 1
 --- !u!1 &4748060571083040515
 GameObject:
   m_ObjectHideFlags: 0
