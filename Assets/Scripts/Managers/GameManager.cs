@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace Managers {
 
 		private void Start() {
 			_emailOriginalPosition = email.transform.position;
-			var daysPath = Application.dataPath + "/Data/difficulties.json";
+			var daysPath = $"{Application.streamingAssetsPath}/difficulties.json";
 			var json = File.ReadAllText(daysPath);
 			var days = json.Substring(1, json.Length - 2).Split(",").Select(int.Parse).ToArray();
 			currentDay = PlayerPrefs.GetInt("Session");
@@ -101,7 +102,11 @@ namespace Managers {
 	}
 }
 
+[Flags]
 public enum Rules {
+	// pour connaitre les regles active:
+	// (_rules & (int) Rules.InvalidAddress) == 0 signifie que la regle des addresses est inactive
+	// (_rules & (int) Rules.InvalidAddress) == 1 signifie qu'il faut faire attention a l'adresse
 	Random = -1,
 	InvalidAddress = 1,
 	IncorrectSpelling = 2,

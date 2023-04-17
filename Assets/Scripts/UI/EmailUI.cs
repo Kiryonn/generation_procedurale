@@ -5,6 +5,7 @@ using Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI {
@@ -14,41 +15,34 @@ namespace UI {
 		[SerializeField] private RectTransform openedLetter;
 		[SerializeField] private RectTransform closedLetter;
 		[SerializeField] private VerticalLayoutGroup textArea;
-		
+
 		[SerializeField] private TMP_Text addressTMPText;
 		[SerializeField] private TMP_Text headerTMPText;
 		[SerializeField] private TMP_Text bodyTMPText;
 		[SerializeField] private TMP_Text footerTMPText;
-		
 
 		[Space] [Header("Drop stuff")]
 		[SerializeField] private RectTransform[] openAreas;
 		[SerializeField] private RectTransform[] closeAreas;
 		private bool _isMailReadable;
 		
-		[Header("Hints for players")]
+		[Header("Hint animation for players")]
 		[SerializeField] private float hintDelay;
-        [SerializeField] private float Duree;
-        private bool _hasInteracted;
+        [SerializeField] private float hintDuration;
+		[SerializeField] private Image imageDrag;
 		private float _counter;
-
-		[Header("animation")]
-		public Image imageDrag;
 
         private void Update() {
 			_counter += Time.deltaTime;
 
-			if (_counter > hintDelay) {
-				imageDrag.gameObject.SetActive(true);
-                imageDrag.rectTransform.position += new Vector3( 1, 0, 0);
+			if (!(_counter > hintDelay)) return;
+			imageDrag.gameObject.SetActive(true);
+			imageDrag.rectTransform.position += new Vector3( 1, 0, 0);
 
-                if (_counter-hintDelay > Duree) 
-				{
-					_counter = 0;
-					imageDrag.rectTransform.position = closedLetter.position;
-                    imageDrag.gameObject.SetActive(false);
-                }
-            }
+			if (!(_counter - hintDelay > hintDuration)) return;
+			_counter = 0;
+			imageDrag.rectTransform.position = closedLetter.position;
+			imageDrag.gameObject.SetActive(false);
 		}
 
 		public void UpdateMailInfos(Email email) {

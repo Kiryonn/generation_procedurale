@@ -10,14 +10,20 @@ namespace Managers {
 		public static EmailManager Instance;
 		public float phishingChance;
 		private string[] _possibleContext;
+		// todo create all mails from the start in the Awake method to lower latency
+		// todo use Resource folder to load json files
+		// todo destroy object after creating all mails and giving them to the GameManager
+		// todo remove debugs logs
+		// todo fix email display on end screen
 
 		private void Awake() {
 			// get the list of possible context
-			DirectoryInfo emailDir = new DirectoryInfo(Application.dataPath + "/Data/Emails/");
-			DirectoryInfo[] contexts = emailDir.GetDirectories();
+			Debug.Log(Application.streamingAssetsPath);
+			DirectoryInfo emailDir = new DirectoryInfo($"{Application.streamingAssetsPath}/Emails/");
+			var contexts = emailDir.GetDirectories();
 			_possibleContext = new string[contexts.Length];
 
-			for (int i = 0; i < contexts.Length; i++)
+			for (var i = 0; i < contexts.Length; i++)
 				_possibleContext[i] = contexts[i].Name;
 
 			// singleton
@@ -38,7 +44,7 @@ namespace Managers {
 			var possibleMails = new Dictionary<int, EmailBlock>();
 
 			// search data
-			var contextPath = Application.dataPath + "/Data/Emails/" + context + "/";
+			var contextPath = Application.streamingAssetsPath + "/Emails/" + context + "/";
 			DirectoryInfo contextDir = new DirectoryInfo(contextPath);
 			var emailRules = contextDir.GetFiles("*.json");
 
@@ -47,7 +53,7 @@ namespace Managers {
 				var filename = emailRule.Name;
 
 				// check rules compatibility
-				var fileRules = int.Parse(filename.Substring(0, filename.Length - extension.Length));
+				var fileRules = int.Parse(filename[..^extension.Length]);
 				var areRulesValid = rules >= fileRules;
 				var rulesCopy = rules;
 				var fileRulesCopy = fileRules;
