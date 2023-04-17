@@ -28,15 +28,27 @@ namespace UI {
 		
 		[Header("Hints for players")]
 		[SerializeField] private float hintDelay;
-		private bool _hasInteracted;
+        [SerializeField] private float Duree;
+        private bool _hasInteracted;
 		private float _counter;
 
-		private void Update() {
+		[Header("animation")]
+		public Image imageDrag;
+
+        private void Update() {
 			_counter += Time.deltaTime;
 
 			if (_counter > hintDelay) {
-				// todo animation de l'aide au drag
-			}
+				imageDrag.gameObject.SetActive(true);
+                imageDrag.rectTransform.position += new Vector3( 1, 0, 0);
+
+                if (_counter-hintDelay > Duree) 
+				{
+					_counter = 0;
+					imageDrag.rectTransform.position = closedLetter.position;
+                    imageDrag.gameObject.SetActive(false);
+                }
+            }
 		}
 
 		public void UpdateMailInfos(Email email) {
