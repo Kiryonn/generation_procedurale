@@ -1,20 +1,15 @@
 ﻿// Namespace imports
-
-using System;
 using Data;
 
 // Unity imports
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace UI
-{
-	public class EmailUI: Draggable, IEndDragHandler
-	{
-		[Header("Prefab Stuff")]
+namespace UI {
+	public class EmailUI: Draggable, IEndDragHandler {
+		[Header("Prefab References")]
 		[SerializeField] private Scrollbar scrollbar;
 		[SerializeField] private RectTransform openedLetter;
 		[SerializeField] private RectTransform closedLetter;
@@ -30,8 +25,7 @@ namespace UI
 		[SerializeField] private RectTransform[] openAreas;
 		[SerializeField] private RectTransform[] closeAreas;
 		private bool _isMailReadable;
-
-		[FormerlySerializedAs("cooldown")]
+		
 		[Header("Hints for players")]
 		[SerializeField] private float hintDelay;
 		private bool _hasInteracted;
