@@ -35,17 +35,18 @@ public class Introduction : MonoBehaviour
         // Construire le texte à afficher en fonction des règles actives
         string rulesActiveText = "Règles actives : \n";
         if (rules.HasFlag(Rules.InvalidAddress))
-            rulesActiveText += "Mauvaise adresse \n";
+            rulesActiveText += "Il y a de Mauvaise adresse email \n";
         if (rules.HasFlag(Rules.IncorrectSpelling))
-            rulesActiveText += "IncorrectSpelling\n";//todo
+            rulesActiveText += "Il y a des faute d'orthographe \n";//todo
         if (rules.HasFlag(Rules.PersonalData))
-            rulesActiveText += "PersonalData\n";//todo
+            rulesActiveText += "Il y a des demandes de données personnelles \n";//todo
         if (rules.HasFlag(Rules.FishyLink))
-            rulesActiveText += "lien piégé \n";
+            rulesActiveText += "Il y a des lien piégé \n";
         if (rules.HasFlag(Rules.ExageratedMail))
-            rulesActiveText += "Mail joant sur les sentiment\n";
+            rulesActiveText += "Il y a des mails faisant appel aux sentiments\n";
 
         // Afficher le texte des règles actives
+        if (rulesActiveText.Length < 30) { rulesActiveText += "pas de regles actives"; }
         _rulesText.text = rulesActiveText;
 
 
