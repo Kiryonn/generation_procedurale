@@ -17,7 +17,8 @@ namespace Managers {
 		[Header("Screens")]
 		public EndGame endGame;
 		[SerializeField] private GameObject game;
-		private int currentDay;
+        [SerializeField] private Introduction into;
+        private int currentDay;
 		private int currentMail;
 		[Header("E-mail")]
 		public EmailUI email;
@@ -28,8 +29,10 @@ namespace Managers {
 
 		private bool _isGameOver;
 		private int _rules;
+		int[] days;
 
-		private void Awake() {
+
+        private void Awake() {
 			if (Instance == null)
 				Instance = this;
 		}
@@ -38,12 +41,12 @@ namespace Managers {
 			_emailOriginalPosition = email.transform.position;
 			var daysPath = $"{Application.streamingAssetsPath}/difficulties.json";
 			var json = File.ReadAllText(daysPath);
-			var days = json.Substring(1, json.Length - 2).Split(",").Select(int.Parse).ToArray();
+			days = json.Substring(1, json.Length - 2).Split(",").Select(int.Parse).ToArray();
 			currentDay = PlayerPrefs.GetInt("Session");
 			_rules = days[currentDay];
 			_sessionEmails = new List<Email>();
-            currentMail = -1;
-            CreateNewEmail();
+            into.gameObject.SetActive(true);
+            into.Restart((Rules)_rules, currentDay);
 		}
 
 		public void CheckResult(bool playerAnswer) {
@@ -84,12 +87,16 @@ namespace Managers {
 		public void NextDay() {
             _isGameOver = false;
 			_sessionEmails = new List<Email>();
-            currentDay += 1;
             endGame.gameObject.SetActive(false);
-            game.SetActive(true);
-            currentMail = -1;
-            CreateNewEmail();
-			//plus reste de la page
+
+            currentDay += 1;
+            _rules = days[currentDay];
+
+			into.gameObject.SetActive(true);
+			into.Restart((Rules)_rules,currentDay);
+
+            //game.SetActive(true);
+            
         }
 
         public void CreateNewEmail(){
@@ -99,7 +106,17 @@ namespace Managers {
 			email.Close();
 			email.UpdateMailInfos(_sessionEmails[currentMail]);
 		}
-	}
+
+		public void Go() 
+		{
+			game.SetActive(true);
+
+            currentMail = -1;
+            CreateNewEmail();
+            //plus reste de la page
+
+        }
+    }
 }
 
 [Flags]
