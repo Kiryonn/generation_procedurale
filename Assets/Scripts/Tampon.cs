@@ -7,33 +7,35 @@ public class Tampon: Draggable, IEndDragHandler
 {
 	[SerializeField] private Image top;
 	[SerializeField] private Image front;
-	public RectTransform rectTransformToCheck;
+	[SerializeField] private RectTransform stampArea;
 
 	public override void OnBeginDrag(PointerEventData eventData) {
 		base.OnBeginDrag(eventData);
 		top.gameObject.SetActive(true);
 		front.gameObject.SetActive(false);
 
-        Vector2 localMousePosition;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(top.rectTransform.parent as RectTransform, eventData.position, null, out localMousePosition);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+			top.rectTransform.parent as RectTransform,
+			eventData.position,
+			null,
+			out Vector2 localMousePosition);
 
-        // Centrer l'objet "top" sur la position de la souris
+        // center the rubber stamp on the mouse
         top.rectTransform.localPosition = localMousePosition;
-
-    }
+	}
 
 	public void OnEndDrag(PointerEventData eventData) {
         top.gameObject.SetActive(false);
 		front.gameObject.SetActive(true);
-		
+
 		RectTransformUtility.ScreenPointToLocalPointInRectangle(
-			rectTransformToCheck,
+			stampArea,
 			eventData.position,
 			eventData.pressEventCamera,
 			out Vector2 localPoint);
 
-		if (rectTransformToCheck.rect.Contains(localPoint))
-			GameManager.Instance.MailValider(true);
+		if (stampArea.rect.Contains(localPoint))
+			GameManager.Instance.AnswerCheck(true);
 
         rectTransform.anchoredPosition = originalPosition;
     }

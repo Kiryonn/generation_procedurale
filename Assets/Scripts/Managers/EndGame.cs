@@ -20,10 +20,10 @@ public class EndGame: MonoBehaviour {
 	[SerializeField] private Button nextLevelButton;
 	[SerializeField] private Button nextButton;
 	[SerializeField] private Button previousButton;
-	private int _mailIndex = 0;
-	private List<Email> _emails;
+	private int _mailIndex;
+	private Email[] _emails;
 
-	public void ListEmail(List<Email> list) {
+	public void ListEmail(Email[] list) {
 		_emails = list;
 		_mailIndex = 0;
 	}
@@ -43,7 +43,7 @@ public class EndGame: MonoBehaviour {
 	public void OnNextButtonPressed() {
 		_mailIndex++;
 		UpdateMailReviewLabel();
-		nextButton.interactable = _mailIndex != _emails.Count - 1;
+		nextButton.interactable = _mailIndex != _emails.Length - 1;
 		previousButton.interactable = true;
 	}
 
@@ -55,7 +55,7 @@ public class EndGame: MonoBehaviour {
 	}
 
 	private void UpdateMailReviewLabel() {
-		mailInfoLabel.text = $"Revue de mail {_mailIndex + 1} / {_emails.Count}";
+		mailInfoLabel.text = $"Revue de mail {_mailIndex + 1} / {_emails.Length}";
 		email.UpdateMailInfos(_emails[_mailIndex]);
 	}
 }

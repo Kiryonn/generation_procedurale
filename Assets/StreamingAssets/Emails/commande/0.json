@@ -12,7 +12,7 @@
 	"headers": {
 		"valid": [
 			"Votre commande est prête",
-			"votre colis est prêt"
+			"Votre colis est prêt"
 		],
 		"invalid": [
 			"une offre excptionelle",
@@ -29,7 +29,6 @@
 	},
 	"footers": {
 		"valid": [
-			
 			"Merci pour vos retours et votre bonté.\n La parfumerie Scorpio"
 		],
 		"invalid": [
