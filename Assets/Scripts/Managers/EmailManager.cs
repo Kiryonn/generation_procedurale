@@ -1,110 +1,150 @@
-﻿using Data;
+﻿// Namespace imports
+using Data;
+
+// System imports
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
+// Unity imports
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Managers
-{
-    internal class EmailManager : MonoBehaviour
-    {
-        public static EmailManager Instance;
-        public float phishingChance;
-        private string[] _possibleContext;
+namespace Managers {
+	public class EmailManager: MonoBehaviour {
+		private void Start() {
+			// get the list of possible context
+			var emailDirPath = $"{Application.streamingAssetsPath}/Emails";
+			DirectoryInfo emailDir = new DirectoryInfo(emailDirPath);
+			var contexts = emailDir.GetDirectories().Select(dir => dir.Name).ToArray();
 
-        private void Awake()
-        {
-            // get the list of possible context
-            DirectoryInfo emailDir = new DirectoryInfo(Application.dataPath + "/Data/Emails/");
-            DirectoryInfo[] contexts = emailDir.GetDirectories();
-            _possibleContext = new string[contexts.Length];
+			GameManager gameManager = GameManager.Instance;
 
-            for (int i = 0; i < contexts.Length; i++)
-                _possibleContext[i] = contexts[i].Name;
+			// choose contexts
+			var usedContexts = new string[gameManager.nbMailDay];
+			for (var i = 0; i < usedContexts.Length; i++)
+				usedContexts[i] = contexts[Random.Range(0, usedContexts.Length)];
 
-            // singleton
-            if (Instance == null)
-                Instance = this;
-        }
+			var mailsCache = new Dictionary<string, Dictionary<Rules, EmailData>>();
+			Rules activeRules = gameManager.activeRules;
 
-        /// <summary>
-        /// Generate a brand new e-mail (data)
-        /// </summary>
-        /// <param name="rules">the active rules of the level</param>
-        /// <returns>The generated e-mail</returns>
-        public Email CreateEMail(int rules)
-        {
-            // choose a context
-            var context = _possibleContext[Random.Range(0, _possibleContext.Length)];
+			// retrieve and cache mails parts
+			foreach (var uniqContext in usedContexts.Distinct()) {
+				mailsCache[uniqContext] = new();
 
-            // declare possibilities
-            var possibleMails = new Dictionary<int, EmailBlock>();
+				// search data within context
+				var contextPath = $"{emailDirPath}/{uniqContext}";
+				var files = new DirectoryInfo(contextPath).GetFiles("*.json");
 
-            // search data
-            string contextPath = Application.dataPath + "/Data/Emails/" + context + "/";
-            DirectoryInfo contextDir = new DirectoryInfo(contextPath);
-            FileInfo[] emailRules = contextDir.GetFiles();
+				foreach (FileInfo file in files) {
+					// retrieve rule
+					Rules rule = FileNameToRules(file);
 
-            foreach (FileInfo emailRule in emailRules)
-            {
-                var extension = emailRule.Extension;
-                var filename = emailRule.Name;
-                // ignore unsupported files
-                if (extension != ".json") continue;
+					// check rule compatibility
+					if (rule != Rules.None && (activeRules & rule) == 0) continue;
 
-                // check rules compatibility
-                var fileRules = int.Parse(filename.Substring(0, filename.Length - extension.Length));
-                var areRulesValid = rules >= fileRules;
-                var rulesCopy = rules;
-                var fileRulesCopy = fileRules;
+					// read file and extract data
+					var json = File.ReadAllText($"{contextPath}/{file.Name}");
+					EmailData emailData = JsonUtility.FromJson<EmailData>(json);
+					mailsCache[uniqContext].Add(rule, emailData);
+				}
+			}
+			
+			var phishingChance = gameManager.phishingChange;
+			var mails = new Email[usedContexts.Length];
+			for (var i = 0; i < usedContexts.Length; i++) {
+				Rules errors = Enum
+					.GetValues(typeof(Rules)).Cast<Rules>()
+					.Where(flag => activeRules.HasFlag(flag) && Random.Range(0, 1f) < phishingChance)
+					.Aggregate(Rules.None, (currentErrors, newError) => currentErrors | newError);
+				// todo check cache compat with error before sending to CreateMail and remove the rubish happening in it
+				mails[i] = CreateMail(errors, mailsCache[usedContexts[i]]);
+			}
 
-                while (areRulesValid || rulesCopy == fileRulesCopy)
-                {
-                    if (rulesCopy == 0 || fileRulesCopy == 0) { areRulesValid = rulesCopy >= fileRulesCopy; break; }
-                    if ((rulesCopy & 1) < (fileRulesCopy & 1)) { areRulesValid = false; continue; }
-                    rulesCopy >>= 1;
-                    fileRulesCopy >>= 1;
-                }
+			gameManager.sessionEmails = mails;
+			gameManager.LoadNextMail();
+			Destroy(this);
+		}
 
-                // ignore incompatible rules
-                if (!areRulesValid) continue;
+		private Email CreateMail(Rules errors, IReadOnlyDictionary<Rules, EmailData> pool) {
+			var addressFlags = new[] { Rules.InvalidAddress };
+			var headerFlags = new[] { Rules.WeirdHeader, Rules.IncorrectSpelling };
+			var bodyFlags = new[] { Rules.ExaggeratedMail, Rules.FishyLink, Rules.IncorrectSpelling, Rules.PersonalData, Rules.Threat };
+			var footerFlags = new Rules[] { };
 
-                // read file
-                var json = File.ReadAllText(contextPath + filename);
-                EmailBlock emailBlock = JsonUtility.FromJson<EmailBlock>(json);
+			// load incorect possibilities
+			string[] addresses;
+			string[] headers;
+			string[] bodies;
+			string[] footers;
 
-                // add data to possibilities
-                possibleMails.Add(fileRules, emailBlock);
-            }
+			// search if error available in pool else find the closest rule to the error
+			if (pool.ContainsKey(errors)) {
+				addresses = pool[errors].addresses;
+				headers = pool[errors].headers;
+				bodies = pool[errors].bodies;
+				footers = pool[errors].footers; }
+			else {
+				Rules addressRules = addressFlags.Where(flag => errors.HasFlag(flag)).Aggregate(Rules.None, (current, flag) => current | flag);
+				Rules headerRules = headerFlags.Where(flag => errors.HasFlag(flag)).Aggregate(Rules.None, (current, flag) => current | flag);
+				Rules bodyRules = bodyFlags.Where(flag => errors.HasFlag(flag)).Aggregate(Rules.None, (current, flag) => current | flag);
+				Rules footerRules = footerFlags.Where(flag => errors.HasFlag(flag)).Aggregate(Rules.None, (current, flag) => current | flag);
 
-            // choose e-mail data
-            var difficulties = possibleMails.Keys.ToArray();
-            var difficulty = difficulties[Random.Range(0, difficulties.Length)];
+				Rules closestAddressRules = Combinations(addressRules).FirstOrDefault(rules => pool.ContainsKey(rules));
+				Rules closestHeaderRules = Combinations(headerRules).FirstOrDefault(rules => pool.ContainsKey(rules));
+				Rules closestBodyRules = Combinations(bodyRules).FirstOrDefault(rules => pool.ContainsKey(rules));
+				Rules closestFooterRules = Combinations(footerRules).FirstOrDefault(rules => pool.ContainsKey(rules));
 
-            var isAddressWrong = Random.Range(0f, 1f) <= phishingChance;
-            var isHeaderWrong = Random.Range(0f, 1f) <= phishingChance;
-            var isBodyWrong = Random.Range(0f, 1f) <= phishingChance;
-            var isFooterWrong = Random.Range(0f, 1f) <= phishingChance;
+				addresses = pool[closestAddressRules].addresses;
+				headers = pool[closestHeaderRules].headers;
+				bodies = pool[closestBodyRules].bodies;
+				footers = pool[closestFooterRules].footers;
 
-            EmailBlock pool = possibleMails[difficulty];
+				// update errors to the closest rules found
+				errors = closestAddressRules | closestHeaderRules | closestBodyRules | closestFooterRules; }
 
-            var address = isAddressWrong
-                ? pool.addresses.invalid[Random.Range(0, pool.addresses.invalid.Count)]
-                : pool.addresses.valid[Random.Range(0, pool.addresses.valid.Count)];
-            var header = isHeaderWrong
-                ? pool.headers.invalid[Random.Range(0, pool.headers.invalid.Count)]
-                : pool.headers.valid[Random.Range(0, pool.headers.valid.Count)];
-            var body = isBodyWrong
-                ? pool.bodies.invalid[Random.Range(0, pool.bodies.invalid.Count)]
-                : pool.bodies.valid[Random.Range(0, pool.bodies.valid.Count)];
-            var footer = isFooterWrong
-                ? pool.footers.invalid[Random.Range(0, pool.footers.invalid.Count)]
-                : pool.footers.valid[Random.Range(0, pool.footers.valid.Count)];
-            var isEmailWrong = isAddressWrong || isHeaderWrong || isBodyWrong || isFooterWrong;
+			// load correct answers and change `errors` if empty
+			// maybe overkill and unnecessary, idk i don't want to think anymore
+			if (addresses.Length == 0) {
+				foreach (Rules flag in addressFlags) if (errors.HasFlag(flag)) errors ^= flag;
+				addresses = pool[Rules.None].addresses; }
+			if (headers.Length == 0) {
+				foreach (Rules flag in headerFlags) if (errors.HasFlag(flag)) errors ^= flag;
+				headers = pool[Rules.None].headers; }
+			if (bodies.Length == 0) {
+				foreach (Rules flag in bodyFlags) if (errors.HasFlag(flag)) errors ^= flag;
+				bodies = pool[Rules.None].bodies; }
+			if (footers.Length == 0) {
+				foreach (Rules flag in footerFlags) if (errors.HasFlag(flag)) errors ^= flag;
+				footers = pool[Rules.None].footers; }
 
-            // return the newly created e-mail
-            return new Email(address, header, body, footer, isEmailWrong);
-        }
-    }
+			// create the mail data
+			var address = addresses[Random.Range(0, addresses.Length)];
+			var header = headers[Random.Range(0, headers.Length)];
+			var body = bodies[Random.Range(0, bodies.Length)];
+			var footer = footers[Random.Range(0, footers.Length)];
+
+			// create and return the mail
+			return new Email(address, header, body, footer, errors);
+		}
+
+		public Rules[] Combinations(Rules rule) {
+			return Enumerable.Range(0, (int)Math.Pow(2, Enum.GetValues(typeof(Rules)).Length))
+				.Select(x => (Rules)x)
+				.Where(x => (x & rule) != 0)
+				.OrderByDescending(x => x)
+				.ToArray();
+		}
+
+		private Rules FileNameToRules(FileSystemInfo file) {
+			var highest = ((int)Enum.GetValues(typeof(Rules)).Cast<Rules>().Max() << 1) - 1;
+			var rules = int.Parse(file.Name[..^file.Extension.Length]);
+
+			if (rules > highest)
+				throw new InvalidDataException($"There is no rules combination that would stack up higher than {highest}. Given : {file.Name}");
+
+			return (Rules) rules;
+		}
+	}
 }

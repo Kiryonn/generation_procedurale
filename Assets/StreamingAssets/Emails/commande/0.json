@@ -1,0 +1,19 @@
+﻿{
+	"addresses":  [
+		"parfumerie.scorpio@.fr",
+		"parfumerie.scorpio.service.client@.fr",
+		"charue@chronopost.fr"
+	],
+	"headers": [
+		"Votre commande est prête",
+		"Votre colis est prêt",
+		"Vous avez (1) charrue en attente de livraison"
+	],
+	"bodies": [
+		"Bonjour ma Majesté Minaj, \n Avec nos récentes recherches, nous avons enfin trouvé un parfum qui pourrait vous convenir. Nous avons réalisé de multiples essais avec différentes plantes comme des mandragores, banchiflores et des saules cogneurs. Notre parfum a des touches boisés, irisées et un soupçon de féminité. Nous vous l’avons déjà envoyé et nous serions comblés d’avoir vos retours."
+	],
+	"footers": [
+		"Merci pour vos retours et votre bonté.\n La parfumerie Scorpio",
+		""
+	]
+}

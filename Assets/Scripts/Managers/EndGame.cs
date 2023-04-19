@@ -1,59 +1,57 @@
+// Namespace imports
 using Data;
-using Managers;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UI;
-using UnityEngine;
+
+// Unity imports
+using TMPro;
 using UnityEngine.UI;
+using UnityEngine;
 
-public class EndGame : MonoBehaviour
-{
-    public EmailUI email;
-    public GameManager gameManager;
-    public TextMeshProUGUI nextDayTextButon;
-    public TextMeshProUGUI nombreErreu;
-    public TextMeshProUGUI currentErreu;
+public class EndGame: MonoBehaviour {
+	[SerializeField] private EmailUI email;
+	[SerializeField] private TMP_Text nextDayTextButton;
+	[SerializeField] private TMP_Text mailInfoLabel;
 
-    public Button mainMenu;
-    public Button suivant;
+	[SerializeField] private Button mainMenuButton;
+	[SerializeField] private Button nextLevelButton;
+	[SerializeField] private Button nextButton;
+	[SerializeField] private Button previousButton;
+	private int _mailIndex;
+	private Email[] _emails;
 
-    public void activeButon() 
-    {
-        mainMenu.interactable = true;
-        suivant.interactable = true;
-    }
-    public void disabledButon() 
-    {
-        mainMenu.interactable = false;
-        suivant.interactable = false;
-    }
-    public void Defeat()
-    {
-        nextDayTextButon.text = "recomencée le niveau";
-        nombreErreu.text = "" + 4;
-        disabledButon();
+	public void ListEmail(Email[] list) {
+		_emails = list;
+		_mailIndex = 0;
+	}
+
+	public void Defeat() {
+		_mailIndex = 0;
+		nextDayTextButton.text = "Recomencer le niveau";
+		UpdateMailReviewLabel();
     }
 
-    public void Victory()
-    {
-        nextDayTextButon.text = "niveau suivant";
-        nombreErreu.text = "" + 4;
-        disabledButon();
+	public void Victory() {
+		_mailIndex = 0;
+		nextDayTextButton.text = "Niveau suivant";
+		UpdateMailReviewLabel();
     }
 
-        public void buttonNext() 
-    {
-        //chargée mail suivant
-        currentErreu.text = "" + 2;
-        activeButon();
-    }
+	public void OnNextButtonPressed() {
+		_mailIndex++;
+		UpdateMailReviewLabel();
+		previousButton.interactable = true;
+		nextButton.interactable = _mailIndex != _emails.Length - 1;
+	}
 
-        public void buttonBack()
-    {
-        //chargée mail precendent 
-        currentErreu.text = "" + 1;
-    }
+	public void OnPreviousButtonPressed() {
+		_mailIndex--;
+		UpdateMailReviewLabel();
+		previousButton.interactable = _mailIndex != 0;
+		nextButton.interactable = true;
+	}
 
-
+	private void UpdateMailReviewLabel() {
+		mailInfoLabel.text = $"Revue de mail {_mailIndex + 1} / {_emails.Length}";
+		email.UpdateMailInfos(_emails[_mailIndex]);
+	}
 }

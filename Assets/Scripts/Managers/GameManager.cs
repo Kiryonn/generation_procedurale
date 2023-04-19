@@ -1,95 +1,107 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+// Namespace imports
 using Data;
 using UI;
+
+// System imports
+using System;
+using System.IO;
+using System.Linq;
+
+// Unity imports
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Managers
-{
-	public class GameManager : MonoBehaviour
-	{
+namespace Managers {
+	public class GameManager: MonoBehaviour {
 		public static GameManager Instance;
-		[Header("Reputation")]
-		public Reputation reputation;
+		[Header("Reputation")] public Reputation reputation;
 		public float reputationLoss;
 		public float reputationGain;
-		[Header("Screens")]
-        public EndGame endGame;
-        [SerializeField]
-        private GameObject game;
-        [Header("E-mail")]
-		public EmailUI email;
+		[Header("Screens")] public EndGame endGame;
+		[SerializeField] private GameObject game;
+		private int _currentDay;
+		private int _currentMail;
+		[Header("E-mail")] public EmailUI email;
+		public int nbMailDay;
+		public float phishingChange;
+		[NonSerialized] public Email[] sessionEmails;
+		[NonSerialized] public Rules activeRules;
 		private Vector2 _emailOriginalPosition;
-		private Email[] _sessionEmails;
-		private int currentDay;
 
-		private int _rules;
+		private bool _isGameOver;
 
-		private void Awake()
-		{
-			if (Instance == null)
-				Instance = this;
+		private void Awake() {
+			if (Instance == null) Instance = this;
+
+			sessionEmails = new Email[nbMailDay];
+			var daysPath = $"{Application.streamingAssetsPath}/days.json";
+			var days = File.ReadAllText(daysPath)[1..^1].Split(",").Select(int.Parse).ToArray();
+			_currentDay = PlayerPrefs.GetInt("Session");
+			activeRules = (Rules) days[_currentDay];
+			_currentMail = -1;
 		}
 
-		private void Start()
-		{
+		private void Start() {
 			_emailOriginalPosition = email.transform.position;
-			var daysPath = Application.dataPath + "/Data/difficulties.json";
-			var json = File.ReadAllText(daysPath);
-			var days = json.Substring(1, json.Length - 2).Split(",").Select(int.Parse).ToArray();
-			currentDay = PlayerPrefs.GetInt("Session");
-			_rules = days[currentDay];
-			CreateNewEmail();
 		}
-		
 
-		/// <summary>
-		/// Check if the player is right or wrong and update the reputation accordingly.
-		/// </summary>
-		/// <param name="playerAnswer">Did the player listed the e-mail as phishing or not.</param>
 		public void CheckResult(bool playerAnswer) {
-			Email currentMail = _sessionEmails[^1];
-			var isPlayerCorrect = playerAnswer == currentMail.IsPhishing;
+			var isPlayerCorrect = playerAnswer && sessionEmails[_currentMail].Errors == Rules.None ||
+								!playerAnswer && sessionEmails[_currentMail].Errors != Rules.None;
 			reputation.AddReputation(isPlayerCorrect ? reputationLoss : reputationGain);
 		}
 
-		public void Victory() {
-            //Instantiate(victoryScreen);
-            endGame.gameObject.SetActive(true);
-            game.SetActive(false);
-            endGame.Victory();
-        }
+		private void Victory() {
+			endGame.gameObject.SetActive(true);
+			game.SetActive(false);
+			endGame.ListEmail(sessionEmails);
+			endGame.Victory();
+			_isGameOver = true;
+		}
 
 		public void Defeat() {
-            currentDay -= 1;
-            endGame.gameObject.SetActive(true);
-            game.SetActive(false);
+			_currentDay -= 1;
+			endGame.gameObject.SetActive(true);
+			game.SetActive(false);
+			endGame.ListEmail(sessionEmails);
 			endGame.Defeat();
-        }
+
+			_isGameOver = true;
+		}
+
+		public void AnswerCheck(bool playerAnswer) {
+			CheckResult(playerAnswer);
+			if (_isGameOver) return;
+			if (_currentMail == nbMailDay-1) Victory();
+			else LoadNextMail();
+		}
 
 		public void GoToMainMenu() {
 			SceneManager.LoadScene("MainMenu");
-			
-        }
+		}
 
-		public void nextDay() {
-			currentDay += 1;
-            endGame.gameObject.SetActive(false);
-            game.SetActive(true);
-			CreateNewEmail();
-			//plus reste de la page
-        }
+		public void NextDay() {
+			PlayerPrefs.SetInt("Session", _currentDay + 1);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		}
 
-		public void CreateNewEmail()
-		{
-			email.gameObject.SetActive(false);
-			email.transform.position = _emailOriginalPosition;
+		public void LoadNextMail() {
+			_currentMail++;
 			email.Close();
-			email.UpdateMailInfos(EmailManager.Instance.CreateEMail(_rules));
-			email.gameObject.SetActive(true);
+			email.UpdateMailInfos(sessionEmails[_currentMail]);
+			email.transform.position = _emailOriginalPosition;
 		}
 	}
+}
+
+[Flags]
+public enum Rules {
+	None = 0,
+	InvalidAddress = 1,
+	IncorrectSpelling = 2,
+	PersonalData = 4,
+	FishyLink = 8,
+	ExaggeratedMail = 16,
+	WeirdHeader = 32,
+	Threat = 64
 }

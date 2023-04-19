@@ -1,0 +1,18 @@
+﻿{
+	"addresses": [
+		"yoann.loir@.fr",
+		"Yoann.Loir@.fr",
+		"Yoann.loir@.fr"
+	],
+	"headers": [
+		"Invitation au séminaire ",
+		"Invitation au séminaire sur la poésie ",
+		"Invitation a une decouverte de la poésie "
+	],
+	"bodies": [
+		"Le séminaire 'Que peut la poésie à l'âge du Capital ?' (Structure International de Philosophie) aura lieu le jeudi 1er avril à la place Saint-Cécile à la tombée de la nuit. Nous aurons le plaisir d'accueillir Stéphane Danski, auteur de Debord ou La diffraction du temps."
+	],
+	"footers": [
+		"En espérant vous retrouver à cette occasion, \n Avec notre plus grand respect, \n Yoann Loir"
+	]
+}

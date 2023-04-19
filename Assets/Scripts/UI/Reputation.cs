@@ -23,7 +23,9 @@ namespace UI
                 maxReputation = 0;
                 Managers.GameManager.Instance.Defeat();
             }
-            reputationSlider.value = maxReputation;
+            if(maxReputation > reputationSlider.maxValue) { reputationSlider.value = reputationSlider.maxValue; }
+            else reputationSlider.value = maxReputation;
         }
+
     }
 }
