@@ -913,12 +913,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Content: {fileID: 8191182162656849352}
   m_Horizontal: 0
-  m_Vertical: 0
+  m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
   m_Inertia: 0
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 15
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 7523983096338896485}
@@ -1442,17 +1442,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 20
     m_Right: 0
     m_Top: 40
     m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 30
-  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
+  m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
 --- !u!114 &7237348318318631673
@@ -1599,7 +1599,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 40, y: 0, z: 0, w: 0}
+  m_margin: {x: 20, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1689,7 +1689,7 @@ MonoBehaviour:
   scrollbar: {fileID: 7523983096338896485}
   openedLetter: {fileID: 1067815175095793997}
   closedLetter: {fileID: 2806066601182223052}
-  textArea: {fileID: 5285784975634329483}
+  scrollRect: {fileID: 7559511765000906933}
   addressTMPText: {fileID: 2744092126146032876}
   headerTMPText: {fileID: 7239822243132420255}
   bodyTMPText: {fileID: 2981670067283207946}

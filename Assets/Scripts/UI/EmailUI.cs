@@ -13,7 +13,7 @@ namespace UI {
 		[SerializeField] private Scrollbar scrollbar;
 		[SerializeField] private RectTransform openedLetter;
 		[SerializeField] private RectTransform closedLetter;
-		[SerializeField] private VerticalLayoutGroup textArea;
+		[SerializeField] private ScrollRect scrollRect;
 
 		[SerializeField] private TMP_Text addressTMPText;
 		[SerializeField] private TMP_Text headerTMPText;
@@ -24,12 +24,6 @@ namespace UI {
 		[SerializeField] private RectTransform[] openAreas;
 		[SerializeField] private RectTransform[] closeAreas;
 		private bool _isMailReadable;
-		
-
-
-        private void Update() {
-
-		}
 
 		public void UpdateMailInfos(Email email) {
 			// update e-mail content
@@ -38,14 +32,12 @@ namespace UI {
 			bodyTMPText.text = email.Body;
 			footerTMPText.text = email.Footer;
 
-			scrollbar.size += 0.1f;
-			scrollbar.size -= 0.1f;
-			
-			Invoke(nameof(RefreshContent), 0.1f);
+			// force scrollbar update
+			scrollbar.size /= 2;
+			scrollbar.size *= 2;
 			
 			// scroll to the top of the letter
-			scrollbar.value = 0;
-			
+			scrollRect.normalizedPosition = new Vector2(0, 1);
 		}
 
 		public void Open() {
@@ -58,9 +50,7 @@ namespace UI {
 			_isMailReadable = false;
 			openedLetter.gameObject.SetActive(false);
 			closedLetter.gameObject.SetActive(true);
-			
-
-        }
+		}
 
 		public void Toggle() {
 			if (_isMailReadable) Open();
@@ -88,28 +78,6 @@ namespace UI {
 
 		private bool Overlaps(RectTransform area, PointerEventData eventData) {
 			return RectTransformUtility.RectangleContainsScreenPoint(area, eventData.position, canvas.worldCamera);
-		}
-
-		private void RefreshContent() {
-			ContentSizeFitter contentSizeFitter = textArea.GetComponent<ContentSizeFitter>();
-			RectTransform textAreaRectTransform = textArea.GetComponent<RectTransform>();
-
-			Canvas.ForceUpdateCanvases();
-			LayoutRebuilder.ForceRebuildLayoutImmediate(textAreaRectTransform);
-			
-			contentSizeFitter.verticalFit = ContentSizeFitter.FitMode.Unconstrained;
-			Canvas.ForceUpdateCanvases();
-			LayoutRebuilder.ForceRebuildLayoutImmediate(textAreaRectTransform);
-			
-			contentSizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-			Canvas.ForceUpdateCanvases();
-			LayoutRebuilder.ForceRebuildLayoutImmediate(textAreaRectTransform);
-			
-			textArea.enabled = false;
-			Canvas.ForceUpdateCanvases();
-			LayoutRebuilder.ForceRebuildLayoutImmediate(textAreaRectTransform);
-			
-			textArea.enabled = true;
 		}
 	}
 }
