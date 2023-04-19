@@ -72,7 +72,7 @@ namespace Managers {
 		public void AnswerCheck(bool playerAnswer) {
 			CheckResult(playerAnswer);
 			if (_isGameOver) return;
-			if (_currentMail == nbMailDay) Victory();
+			if (_currentMail == nbMailDay-1) Victory();
 			else LoadNextMail();
 		}
 
