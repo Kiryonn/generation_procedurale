@@ -35,11 +35,9 @@ namespace Managers {
 
 			sessionEmails = new Email[nbMailDay];
 			var daysPath = $"{Application.streamingAssetsPath}/days.json";
-			var json = File.ReadAllText(daysPath);
-
-			var days = json[1..^1].Split(",").Select(int.Parse).ToArray();
+			var days = File.ReadAllText(daysPath)[1..^1].Split(",").Select(int.Parse).ToArray();
 			_currentDay = PlayerPrefs.GetInt("Session");
-			activeRules = (Rules)days[_currentDay];
+			activeRules = (Rules) days[_currentDay];
 			_currentMail = -1;
 		}
 
@@ -54,7 +52,6 @@ namespace Managers {
 		}
 
 		private void Victory() {
-			//Instantiate(victoryScreen);
 			endGame.gameObject.SetActive(true);
 			game.SetActive(false);
 			endGame.ListEmail(sessionEmails);
@@ -99,15 +96,12 @@ namespace Managers {
 
 [Flags]
 public enum Rules {
-	// pour connaitre les regles active:
-	// (_rules & (int) Rules.InvalidAddress) == 0 signifie que la regle des addresses est inactive
-	// (_rules & (int) Rules.InvalidAddress) == 1 signifie qu'il faut faire attention a l'adresse
 	None = 0,
 	InvalidAddress = 1,
-	IncorrectSpelling = 1 << 1,
-	PersonalData = 1 << 2,
-	FishyLink = 1 << 3,
-	ExaggeratedMail = 1 << 4,
-	WeirdHeader = 1 << 5,
-	Threat = 1 << 6
+	IncorrectSpelling = 2,
+	PersonalData = 4,
+	FishyLink = 8,
+	ExaggeratedMail = 16,
+	WeirdHeader = 32,
+	Threat = 64
 }

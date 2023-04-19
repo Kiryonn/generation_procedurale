@@ -7,10 +7,6 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
 
-// Other imports
-using System.Collections.Generic;
-
-
 public class EndGame: MonoBehaviour {
 	[SerializeField] private EmailUI email;
 	[SerializeField] private TMP_Text nextDayTextButton;
@@ -43,14 +39,14 @@ public class EndGame: MonoBehaviour {
 	public void OnNextButtonPressed() {
 		_mailIndex++;
 		UpdateMailReviewLabel();
-		nextButton.interactable = _mailIndex != _emails.Length - 1;
 		previousButton.interactable = true;
+		nextButton.interactable = _mailIndex != _emails.Length - 2;
 	}
 
 	public void OnPreviousButtonPressed() {
 		_mailIndex--;
 		UpdateMailReviewLabel();
-		previousButton.interactable = _mailIndex != 0;
+		previousButton.interactable = _mailIndex != -1;
 		nextButton.interactable = true;
 	}
 

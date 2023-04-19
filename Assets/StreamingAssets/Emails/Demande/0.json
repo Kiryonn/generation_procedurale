@@ -1,42 +1,21 @@
 ﻿{
-	"addresses": {
-		"valid": [
-			"flavien.flapart@.fr",
-			"fabien.flapart@.fr",
-			"françois.flapart@.fr",
-			"flober.flapart@.fr",
-			"florian.flapart@.fr"
-		],
-		"invalid": [
-			"arture.kevin@.fr",
-			"florence.flapart@.tu"
-		]
-	},
-	"headers": {
-		"valid": [
-			"Demande de la maison Flapart",
-			"Demande de la seigneurie Flapart",
-			"Demande du Duc Flapart"
-		],
-		"invalid": [
-			"une offre excptionelle du Duc Flapart"
-		]
-	},
-	"bodies": {
-		"valid": [	
-			"Le séminaire 'Que peut la poésie à l'âge du Capital ?' (Structure International de Philosophie) aura lieu le jeudi 1er avril à la place Saint-Cécile à la tombée de la nuit. Nous aurons le plaisir d'accueillir Stéphane Danski, auteur de Debord ou La diffraction du temps."
-		],
-		"invalid": [
-			"donne moi tout ton argent ou je te tue "
-		]
-	},
-	"footers": {
-		"valid": [
-			"En vous remerciant d’avance, pour votre bonté et votre âme,\n Flavien Flapart",
-			"En vous remerciant d’avance, pour votre bonté et votre âme,\n  la seigneurie Flapart"
-		],
-		"invalid": [
-			"avec toute amité , le garde de la 3 eme ronde"
-		]
-	}
+	"addresses": [
+		"flavien.flapart@.fr",
+		"fabien.flapart@.fr",
+		"françois.flapart@.fr",
+		"flober.flapart@.fr",
+		"florian.flapart@.fr"
+	],
+	"headers": [
+		"Demande de la maison Flapart",
+		"Demande de la seigneurie Flapart",
+		"Demande du Duc Flapart"
+	],
+	"bodies": [	
+		"Le séminaire 'Que peut la poésie à l'âge du Capital ?' (Structure International de Philosophie) aura lieu le jeudi 1er avril à la place Saint-Cécile à la tombée de la nuit. Nous aurons le plaisir d'accueillir Stéphane Danski, auteur de Debord ou La diffraction du temps."
+	],
+	"footers": [
+		"En vous remerciant d’avance, pour votre bonté et votre âme,\n Flavien Flapart",
+		"En vous remerciant d’avance, pour votre bonté et votre âme,\n  la seigneurie Flapart"
+	]
 }

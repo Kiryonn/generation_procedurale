@@ -13,9 +13,6 @@ using Random = UnityEngine.Random;
 
 namespace Managers {
 	public class EmailManager: MonoBehaviour {
-		// todo create all mails from the start to lower latency
-		// todo fix email display on end screen
-
 		private void Start() {
 			// get the list of possible context
 			var emailDirPath = $"{Application.streamingAssetsPath}/Emails";
@@ -55,13 +52,13 @@ namespace Managers {
 			}
 			
 			var phishingChance = gameManager.phishingChange;
-			// todo create mails and push them into the GameManager
 			var mails = new Email[usedContexts.Length];
 			for (var i = 0; i < usedContexts.Length; i++) {
 				Rules errors = Enum
 					.GetValues(typeof(Rules)).Cast<Rules>()
 					.Where(flag => activeRules.HasFlag(flag) && Random.Range(0, 1f) < phishingChance)
 					.Aggregate(Rules.None, (currentErrors, newError) => currentErrors | newError);
+				// todo check cache compat with error before sending to CreateMail and remove the rubish happening in it
 				mails[i] = CreateMail(errors, mailsCache[usedContexts[i]]);
 			}
 
@@ -72,22 +69,55 @@ namespace Managers {
 
 		private Email CreateMail(Rules errors, IReadOnlyDictionary<Rules, EmailData> pool) {
 			var addressFlags = new[] { Rules.InvalidAddress };
-			var headerFlags = new[] { Rules.WeirdHeader };
+			var headerFlags = new[] { Rules.WeirdHeader, Rules.IncorrectSpelling };
 			var bodyFlags = new[] { Rules.ExaggeratedMail, Rules.FishyLink, Rules.IncorrectSpelling, Rules.PersonalData, Rules.Threat };
-			var footerFlag = new Rules[] { };
-			
-			// load incorect possibilities
-			// todo update lists
-			var addresses = Array.Empty<string>();
-			var headers = Array.Empty<string>();
-			var bodies = Array.Empty<string>();
-			var footers = Array.Empty<string>();
+			var footerFlags = new Rules[] { };
 
-			// load correct values
-			if (addresses.Length == 0) addresses = pool[Rules.None].addresses;
-			if (headers.Length == 0) headers = pool[Rules.None].headers;
-			if (bodies.Length == 0) bodies = pool[Rules.None].bodies;
-			if (footers.Length == 0) footers = pool[Rules.None].footers;
+			// load incorect possibilities
+			string[] addresses;
+			string[] headers;
+			string[] bodies;
+			string[] footers;
+
+			// search if error available in pool else find the closest rule to the error
+			if (pool.ContainsKey(errors)) {
+				addresses = pool[errors].addresses;
+				headers = pool[errors].headers;
+				bodies = pool[errors].bodies;
+				footers = pool[errors].footers; }
+			else {
+				Rules addressRules = addressFlags.Where(flag => errors.HasFlag(flag)).Aggregate(Rules.None, (current, flag) => current | flag);
+				Rules headerRules = headerFlags.Where(flag => errors.HasFlag(flag)).Aggregate(Rules.None, (current, flag) => current | flag);
+				Rules bodyRules = bodyFlags.Where(flag => errors.HasFlag(flag)).Aggregate(Rules.None, (current, flag) => current | flag);
+				Rules footerRules = footerFlags.Where(flag => errors.HasFlag(flag)).Aggregate(Rules.None, (current, flag) => current | flag);
+
+				Rules closestAddressRules = Combinations(addressRules).FirstOrDefault(rules => pool.ContainsKey(rules));
+				Rules closestHeaderRules = Combinations(headerRules).FirstOrDefault(rules => pool.ContainsKey(rules));
+				Rules closestBodyRules = Combinations(bodyRules).FirstOrDefault(rules => pool.ContainsKey(rules));
+				Rules closestFooterRules = Combinations(footerRules).FirstOrDefault(rules => pool.ContainsKey(rules));
+
+				addresses = pool[closestAddressRules].addresses;
+				headers = pool[closestHeaderRules].headers;
+				bodies = pool[closestBodyRules].bodies;
+				footers = pool[closestFooterRules].footers;
+
+				// update errors to the closest rules found
+				errors = closestAddressRules | closestHeaderRules | closestBodyRules | closestFooterRules; }
+
+			// load correct answers and change `errors` if empty
+			// maybe overkill and unnecessary, idk i don't want to think anymore
+			if (addresses.Length == 0) {
+				foreach (Rules flag in addressFlags) if (errors.HasFlag(flag)) errors ^= flag;
+				addresses = pool[Rules.None].addresses; }
+			if (headers.Length == 0) {
+				foreach (Rules flag in headerFlags) if (errors.HasFlag(flag)) errors ^= flag;
+				headers = pool[Rules.None].headers; }
+			if (bodies.Length == 0) {
+				foreach (Rules flag in bodyFlags) if (errors.HasFlag(flag)) errors ^= flag;
+				bodies = pool[Rules.None].bodies; }
+			if (footers.Length == 0) {
+				foreach (Rules flag in footerFlags) if (errors.HasFlag(flag)) errors ^= flag;
+				footers = pool[Rules.None].footers; }
 
 			// create the mail data
 			var address = addresses[Random.Range(0, addresses.Length)];
@@ -97,6 +127,14 @@ namespace Managers {
 
 			// create and return the mail
 			return new Email(address, header, body, footer, errors);
+		}
+
+		public Rules[] Combinations(Rules rule) {
+			return Enumerable.Range(0, (int)Math.Pow(2, Enum.GetValues(typeof(Rules)).Length))
+				.Select(x => (Rules)x)
+				.Where(x => (x & rule) != 0)
+				.OrderByDescending(x => x)
+				.ToArray();
 		}
 
 		private Rules FileNameToRules(FileSystemInfo file) {

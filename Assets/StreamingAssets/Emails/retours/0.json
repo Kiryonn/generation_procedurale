@@ -1,37 +1,16 @@
 ﻿{
-	"addresses": {
-		"valid": [
-			 "kiami@.fr" 
-		],
-		"invalid": [
-			"jeVaisTePiraté@jesuisDebile.com"
-		]
-	},
-	"headers": {
-		"valid": [
-			
-			"Emballer vos retours","votre retours","votre demande de retour"
-		],
-		"invalid": [
-			"une offre excptionelle "
-		]
-	},
-	"bodies": {
-		"valid": [
-			
-			"Bonjour costumière de Mailbourg, \n Nous avons bien reçu votre demande de retour concernant la robe de sa Majesté Minaj jugée trop petite. Vous pouvez désormais commencer à préparer votre malle poste. Dès que nous l'aurons reçu, nous vous rembourserons sous 14 jours. Dans tous les cas, nous vous tiendrons au courant dès réception de votre retour."
-
-		],
-		"invalid": [
-			"donne moi tout ton argent ou je te tue "
-		]
-	},
-	"footers": {
-		"valid": [
-			"Respectueusement, \n Le commerce, Kiami"
-		],
-		"invalid": [
-			"avec toute amité , le garde de la 3 eme ronde "
-		]
-	}
+	"addresses": [
+		"kiami@.fr"
+	],
+	"headers": [
+		"Emballer vos retours",
+		"votre retours",
+		"votre demande de retour"
+	],
+	"bodies": [
+		"\tBonjour costumière de Mailbourg,\nNous avons bien reçu votre demande de retour concernant la robe de sa Majesté Minaj jugée trop petite. Vous pouvez désormais commencer à préparer votre malle poste. Dès que nous l'aurons reçu, nous vous rembourserons sous 14 jours. Dans tous les cas, nous vous tiendrons au courant dès réception de votre retour."
+	],
+	"footers": [
+		"Respectueusement, \n Le commerce, Kiami"
+	]
 }

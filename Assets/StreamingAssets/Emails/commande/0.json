@@ -1,38 +1,16 @@
 ﻿{
-	"addresses": {
-		"valid": [
-			"parfumerie.scorpio@.fr",
-			"parfumerie.scorpio.service.client@.fr"
-		],
-		"invalid": [
-			"jeVaisTePiraté@jesuisDebile.com",
-			"parfumerie.scorpoi@.fr"
-		]
-	},
-	"headers": {
-		"valid": [
-			"Votre commande est prête",
-			"Votre colis est prêt"
-		],
-		"invalid": [
-			"une offre excptionelle",
-			"votre colis en attente"
-		]
-	},
-	"bodies": {
-		"valid": [
-			"Bonjour ma Majesté Minaj, \n Avec nos récentes recherches, nous avons enfin trouvé un parfum qui pourrait vous convenir. Nous avons réalisé de multiples essais avec différentes plantes comme des mandragores, banchiflores et des saules cogneurs. Notre parfum a des touches boisés, irisées et un soupçon de féminité. Nous vous l’avons déjà envoyé et nous serions comblés d’avoir vos retours."
-		],
-		"invalid": [
-			"donne moi tout ton argent ou je te tue "," votre commande est blockée mercie de venir la cherche samedi a 15h"
-		]
-	},
-	"footers": {
-		"valid": [
-			"Merci pour vos retours et votre bonté.\n La parfumerie Scorpio"
-		],
-		"invalid": [
-			"avec toute amité , le garde de la 3 eme ronde "
-		]
-	}
+	"addresses":  [
+		"parfumerie.scorpio@.fr",
+		"parfumerie.scorpio.service.client@.fr"
+	],
+	"headers": [
+		"Votre commande est prête",
+		"Votre colis est prêt"
+	],
+	"bodies": [
+		"Bonjour ma Majesté Minaj, \n Avec nos récentes recherches, nous avons enfin trouvé un parfum qui pourrait vous convenir. Nous avons réalisé de multiples essais avec différentes plantes comme des mandragores, banchiflores et des saules cogneurs. Notre parfum a des touches boisés, irisées et un soupçon de féminité. Nous vous l’avons déjà envoyé et nous serions comblés d’avoir vos retours."
+	],
+	"footers": [
+		"Merci pour vos retours et votre bonté.\n La parfumerie Scorpio"
+	]
 }
