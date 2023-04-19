@@ -779,6 +779,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2416980918255523330, guid: 19065142c8dd4fc41b4daaead676c389, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1596080221}
+    - target: {fileID: 2416980918255523330, guid: 19065142c8dd4fc41b4daaead676c389, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AnswerCheck
+      objectReference: {fileID: 0}
     - target: {fileID: 2585598370797654713, guid: 19065142c8dd4fc41b4daaead676c389, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
