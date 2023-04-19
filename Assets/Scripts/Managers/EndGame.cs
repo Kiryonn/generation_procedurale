@@ -28,29 +28,25 @@ public class EndGame: MonoBehaviour {
 		_mailIndex = 0;
 		nextDayTextButton.text = "Recomencer le niveau";
 		UpdateMailReviewLabel();
-        nextButton.interactable = true;
-        previousButton.interactable = false;
     }
 
 	public void Victory() {
 		_mailIndex = 0;
 		nextDayTextButton.text = "Niveau suivant";
 		UpdateMailReviewLabel();
-        nextButton.interactable = true;
-        previousButton.interactable = false;
     }
 
 	public void OnNextButtonPressed() {
 		_mailIndex++;
 		UpdateMailReviewLabel();
 		previousButton.interactable = true;
-		nextButton.interactable = _mailIndex != _emails.Length - 2;
+		nextButton.interactable = _mailIndex != _emails.Length - 1;
 	}
 
 	public void OnPreviousButtonPressed() {
 		_mailIndex--;
 		UpdateMailReviewLabel();
-		previousButton.interactable = _mailIndex != -1;
+		previousButton.interactable = _mailIndex != 0;
 		nextButton.interactable = true;
 	}
 
