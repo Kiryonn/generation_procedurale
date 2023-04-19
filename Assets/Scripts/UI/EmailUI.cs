@@ -25,23 +25,10 @@ namespace UI {
 		[SerializeField] private RectTransform[] closeAreas;
 		private bool _isMailReadable;
 		
-		[Header("Hint animation for players")]
-		[SerializeField] private float hintDelay;
-        [SerializeField] private float hintDuration;
-		[SerializeField] private Image imageDrag;
-		private float _counter;
+
 
         private void Update() {
-			_counter += Time.deltaTime;
 
-			if (!(_counter > hintDelay)) return;
-			imageDrag.gameObject.SetActive(true);
-			imageDrag.rectTransform.position += new Vector3( 1, 0, 0);
-
-			if (!(_counter - hintDelay > hintDuration)) return;
-			_counter = 0;
-			imageDrag.rectTransform.position = closedLetter.position;
-			imageDrag.gameObject.SetActive(false);
 		}
 
 		public void UpdateMailInfos(Email email) {
@@ -71,7 +58,9 @@ namespace UI {
 			_isMailReadable = false;
 			openedLetter.gameObject.SetActive(false);
 			closedLetter.gameObject.SetActive(true);
-		}
+			
+
+        }
 
 		public void Toggle() {
 			if (_isMailReadable) Open();
