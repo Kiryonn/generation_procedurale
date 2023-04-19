@@ -78,10 +78,10 @@ namespace Managers {
 			
 			// load incorect possibilities
 			// todo update lists
-			var addresses;
-			var headers;
-			var bodies;
-			var footers;
+			var addresses = Array.Empty<string>();
+			var headers = Array.Empty<string>();
+			var bodies = Array.Empty<string>();
+			var footers = Array.Empty<string>();
 
 			// load correct values
 			if (addresses.Length == 0) addresses = pool[Rules.None].addresses;
