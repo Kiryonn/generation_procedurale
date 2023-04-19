@@ -42,8 +42,12 @@ public class Introduction : MonoBehaviour
             rulesActiveText += "Il y a des demandes de données personnelles \n";//todo
         if (rules.HasFlag(Rules.FishyLink))
             rulesActiveText += "Il y a des lien piégé \n";
-        if (rules.HasFlag(Rules.ExageratedMail))
+        if (rules.HasFlag(Rules.ExaggeratedMail))
             rulesActiveText += "Il y a des mails faisant appel aux sentiments\n";
+        if (rules.HasFlag(Rules.WeirdHeader))
+            rulesActiveText += "Il y a des mails avec titre de mail douteux\n";
+        if (rules.HasFlag(Rules.Threat))
+            rulesActiveText += "Il y a des Mail contenant des menace\n";
 
         // Afficher le texte des règles actives
         if (rulesActiveText.Length < 30) { rulesActiveText += "pas de regles actives"; }

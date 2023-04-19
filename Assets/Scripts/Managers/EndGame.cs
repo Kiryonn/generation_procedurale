@@ -32,13 +32,17 @@ public class EndGame: MonoBehaviour {
 		_mailIndex = 0;
 		nextDayTextButton.text = "Recomencer le niveau";
 		UpdateMailReviewLabel();
-	}
+        nextButton.interactable = true;
+        previousButton.interactable = false;
+    }
 
 	public void Victory() {
 		_mailIndex = 0;
 		nextDayTextButton.text = "Niveau suivant";
 		UpdateMailReviewLabel();
-	}
+        nextButton.interactable = true;
+        previousButton.interactable = false;
+    }
 
 	public void OnNextButtonPressed() {
 		_mailIndex++;

@@ -17,7 +17,7 @@ namespace Managers {
 		[Header("Screens")]
 		public EndGame endGame;
 		[SerializeField] private GameObject game;
-        [SerializeField] private Introduction into;
+        [SerializeField] private Introduction intro;
         private int currentDay;
 		private int currentMail;
 		[Header("E-mail")]
@@ -45,8 +45,8 @@ namespace Managers {
 			currentDay = PlayerPrefs.GetInt("Session");
 			_rules = days[currentDay];
 			_sessionEmails = new List<Email>();
-            into.gameObject.SetActive(true);
-            into.Restart((Rules)_rules, currentDay);
+            intro.gameObject.SetActive(true);
+            intro.Restart((Rules)_rules, currentDay);
 		}
 
 		public void CheckResult(bool playerAnswer) {
@@ -92,8 +92,8 @@ namespace Managers {
             currentDay += 1;
             _rules = days[currentDay];
 
-			into.gameObject.SetActive(true);
-			into.Restart((Rules)_rules,currentDay);
+			intro.gameObject.SetActive(true);
+			intro.Restart((Rules)_rules,currentDay);
 
             //game.SetActive(true);
             
@@ -129,5 +129,7 @@ public enum Rules {
 	IncorrectSpelling = 2,
 	PersonalData = 4,
 	FishyLink = 8,
-	ExageratedMail = 16
+    ExaggeratedMail = 16,
+    WeirdHeader = 32,
+    Threat = 64
 }
