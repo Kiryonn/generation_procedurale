@@ -84,6 +84,7 @@ namespace UI {
 		public void OnEndDrag(PointerEventData eventData) {
 			if (Overlaps(trashCan, eventData)) {
 				GameManager.Instance.AnswerCheck(false);
+				return;
 			} else if (Overlaps(closeArea, eventData)) {
 				if (!_isMailReadable) return;  // mail already closed
 				Close();
