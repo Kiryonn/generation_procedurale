@@ -24,7 +24,7 @@ public class Introduction: MonoBehaviour {
 
 	public void Restart(Rules rules, int curentDay) {
 		_counter = 0;
-		Titre.text = "Jour      :  " + curentDay;
+		Titre.text = $"Jour {curentDay}";
 
 		// Construire le texte à afficher en fonction des r�gles actives
 		string rulesActiveText = "Règles actives : \n";
