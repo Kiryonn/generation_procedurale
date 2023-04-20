@@ -39,7 +39,6 @@ namespace Managers {
 			var days = File.ReadAllText(daysPath)[1..^1].Split(",").Select(int.Parse).ToArray();
 			_currentDay = PlayerPrefs.GetInt("Session");
 			activeRules = (Rules) days[_currentDay-1];
-			Debug.Log(activeRules);
 			_currentMail = -1;
 
 			intro.gameObject.SetActive(true);
@@ -95,7 +94,6 @@ namespace Managers {
 			_currentMail++;
 			email.Close();
 			email.UpdateMailInfos(sessionEmails[_currentMail]);
-			Debug.Log(_emailOriginalPosition);
 			email.GetComponent<RectTransform>().anchoredPosition = _emailOriginalPosition;
 		}
 	}
