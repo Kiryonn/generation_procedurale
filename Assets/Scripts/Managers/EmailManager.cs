@@ -21,11 +21,11 @@ namespace Managers {
 
 			GameManager gameManager = GameManager.Instance;
 
-			// choose contexts
+			// choose theme for each mail
 			var usedContexts = new string[gameManager.nbMailDay];
 			for (var i = 0; i < usedContexts.Length; i++)
 				usedContexts[i] = contexts[Random.Range(0, usedContexts.Length)];
-
+			
 			var mailsCache = new Dictionary<string, Dictionary<Rules, EmailData>>();
 			Rules activeRules = gameManager.activeRules;
 
