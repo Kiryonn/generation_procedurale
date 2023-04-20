@@ -38,7 +38,8 @@ namespace Managers {
 			var daysPath = $"{Application.streamingAssetsPath}/days.json";
 			var days = File.ReadAllText(daysPath)[1..^1].Split(",").Select(int.Parse).ToArray();
 			_currentDay = PlayerPrefs.GetInt("Session");
-			activeRules = (Rules) days[_currentDay];
+			activeRules = (Rules) days[_currentDay-1];
+			Debug.Log(activeRules);
 			_currentMail = -1;
 
 			intro.gameObject.SetActive(true);
@@ -110,4 +111,3 @@ public enum Rules {
 	WeirdHeader = 32,
 	Threat = 64
 }
- 
