@@ -35,21 +35,9 @@ Un outil très utile si vous avez du mal avec le binaire est la calculatrice de 
 
 ```json
 {
-	"addresses": {
-		"valid": [],
-		"invalid": []
-	},
-	"headers": {
-		"valid": [],
-		"invalid": []
-	},
-	"bodies": {
-		"valid": [],
-		"invalid": []
-	},
-	"footers": {
-		"valid": [],
-		"invalid": []
-	}
+	"addresses": [],
+	"headers": [],
+	"bodies": [],
+	"footers": []
 }
 ```
