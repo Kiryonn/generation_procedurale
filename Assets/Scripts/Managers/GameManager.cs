@@ -48,7 +48,7 @@ namespace Managers {
         }
 
 		private void Start() {
-			_emailOriginalPosition = email.transform.position;
+			_emailOriginalPosition = email.GetComponent<RectTransform>().anchoredPosition;
 		}
 
 		public void CheckResult(bool playerAnswer) {
@@ -95,7 +95,8 @@ namespace Managers {
 			_currentMail++;
 			email.Close();
 			email.UpdateMailInfos(sessionEmails[_currentMail]);
-			email.transform.position = _emailOriginalPosition;
+			Debug.Log(_emailOriginalPosition);
+			email.GetComponent<RectTransform>().anchoredPosition = _emailOriginalPosition;
 		}
 	}
 }
