@@ -19,7 +19,8 @@ namespace Managers {
 		public float reputationGain;
 		[Header("Screens")] public EndGame endGame;
 		[SerializeField] private GameObject game;
-		private int _currentDay;
+        [SerializeField] private Introduction intro;
+        private int _currentDay;
 		private int _currentMail;
 		[Header("E-mail")] public EmailUI email;
 		public int nbMailDay;
@@ -39,7 +40,11 @@ namespace Managers {
 			_currentDay = PlayerPrefs.GetInt("Session");
 			activeRules = (Rules) days[_currentDay];
 			_currentMail = -1;
-		}
+
+			intro.gameObject.SetActive(true);
+            intro.Restart(activeRules, _currentDay);
+
+        }
 
 		private void Start() {
 			_emailOriginalPosition = email.transform.position;
