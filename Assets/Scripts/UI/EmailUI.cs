@@ -1,5 +1,6 @@
 ﻿// Namespace imports
 using Data;
+using Managers;
 
 // Unity imports
 using TMPro;
@@ -21,9 +22,27 @@ namespace UI {
 		[SerializeField] private TMP_Text footerTMPText;
 
 		[Space] [Header("Drop stuff")]
-		[SerializeField] private RectTransform[] openAreas;
-		[SerializeField] private RectTransform[] closeAreas;
+		[SerializeField] private RectTransform openArea;
+		[SerializeField] private RectTransform closeArea;
+		[SerializeField] private RectTransform trashCan;
 		private bool _isMailReadable;
+
+		[Header("Animation")]
+		[SerializeField] private GameObject animationImage;
+
+		private void Start() {
+			Invoke(nameof(AnimationStart), 10);
+		}
+		
+		private void AnimationStart() {
+			animationImage.SetActive(true);
+		}
+
+		private void AnimationStop() {
+			CancelInvoke();
+			animationImage.SetActive(false);
+		}
+		
 
 		public void UpdateMailInfos(Email email) {
 			// update e-mail content
@@ -57,17 +76,20 @@ namespace UI {
 			else Close();
 		}
 
+		public override void OnBeginDrag(PointerEventData eventData) {
+			base.OnBeginDrag(eventData);
+			AnimationStop();
+		}
+
 		public void OnEndDrag(PointerEventData eventData) {
-			// check if the drop position is within a valid area
-			foreach (RectTransform droppableArea in closeAreas) {
-				if (!Overlaps(droppableArea, eventData)) continue;
+			if (Overlaps(trashCan, eventData)) {
+				GameManager.Instance.AnswerCheck(false);
+			} else if (Overlaps(closeArea, eventData)) {
 				if (!_isMailReadable) return;  // mail already closed
 				Close();
-				closedLetter.position = droppableArea.position;
+				closedLetter.position = closeArea.position;
 				return;
-			}
-			foreach (RectTransform droppableArea in openAreas) {
-				if (!Overlaps(droppableArea, eventData)) continue;
+			} else if (Overlaps(openArea, eventData)) {
 				if (_isMailReadable) return;  // mail already opened
 				Open();
 				return;

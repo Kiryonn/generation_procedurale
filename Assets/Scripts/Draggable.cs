@@ -6,7 +6,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler {
 	protected RectTransform rectTransform;
 	protected Vector2 originalPosition;
 
-	private void Start() { rectTransform = GetComponent<RectTransform>(); }
+	private void Awake() { rectTransform = GetComponent<RectTransform>(); }
 
 	public virtual void OnBeginDrag(PointerEventData eventData) { originalPosition = rectTransform.anchoredPosition; }
 
