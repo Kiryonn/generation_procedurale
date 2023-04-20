@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba5aec6a1df6b24e9a360ec919fa2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxReputation: 100
+  maxReputation: 10
   reputationSlider: {fileID: 6523534956638775651}
 --- !u!1 &6523534956886274004
 GameObject:
